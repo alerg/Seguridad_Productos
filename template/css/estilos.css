@@ -1,0 +1,568 @@
+/* Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/) */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*Generales*/
+
+body{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color:black;
+	background-color:#004388;
+}
+
+a{
+	text-decoration:none;
+	font-weight:bold;
+	color:#656565;
+}
+
+.contenedor{
+	background-color:white;
+}
+
+.columna{
+	float:left;
+	padding:15px 0;
+}
+
+.columna--simple{
+	clear:both;
+	width:100%;
+}
+
+.columna--doble{
+	width:46%;
+	margin:0 1%;
+}
+
+.columna--triple{
+	width:31%;
+	margin:0 1%;
+
+}
+
+.error{
+	color:#E32C24;
+}
+
+.exito{
+	color:#004388;
+}
+
+/*Cabecera*/
+
+header{background-color:white; padding-top:10px;}
+
+header>.contenedor{ position:relative; }
+
+h1{
+	width:160px;
+	height:58px;
+	margin-bottom:15px;
+	background:transparent url('../img/logo.gif') no-repeat top left;
+}
+
+h1 span{
+	display:none;
+}
+
+h1 a{
+	display:block;
+	width:100%;
+	height:100%;
+}
+
+.nav-principal{
+	background-color:#004388;
+	color:white;
+	line-height:38px;
+}
+
+.nav-principal .contenedor{
+	background:transparent;
+}
+
+.nav-principal li{
+	display:inline;
+	padding:10px 30px;
+}
+
+.nav-principal a{
+	color:white;
+	font-weight:normal;
+	letter-spacing:1px;
+}
+
+.nav-principal li:hover{
+	background-color:#006EB4;
+	padding:7px 30px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+/*Contenido*/
+
+section, footer, .contenedor{
+	width:1002px; 
+	margin-left:auto;
+	margin-right:auto;
+}
+
+section{background-color:white;}
+
+.contenedor.contenido{overflow:hidden; width:100%;}
+
+h2{
+	margin:25px 0 15px 0;
+	padding:0 0 3px 0;
+	border-bottom:2px solid #E1E1E1;
+	text-transform:uppercase;
+	color:#E32C24;
+}
+
+h3{
+	font-weight:bold;
+	color:#656565;
+	text-align:left;
+}
+
+form{
+	text-align:center;
+}
+
+form.search{
+	text-align:left;
+}
+
+fieldset{
+	margin:15px 0;
+	padding:30px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border:1px solid #E1E1E1;
+	background-color:#F6F6F6;
+	text-align:left;
+}
+
+input,textarea{
+	display:block;
+	width:80%;
+	height:30px;
+	margin:6px 0 20px 0;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	border:1px solid #E1E1E1;
+}
+
+input[type="radio"]{
+	display:inline;
+	width:15px;
+	height:15px;
+	margin:5px 5px 0 15px;
+}
+
+select{min-width:360px; margin:5px 0;}
+
+.boton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	background-color:#004388;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	text-indent:0;
+	border:1px solid #84bbf3;
+	display:block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bold;
+	font-style:normal;
+	height:40px;
+	line-height:40px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #528ecc;
+	margin-top:17px;
+}
+
+.boton:hover {
+	background-color:#006EB4;
+	cursor:pointer;
+}
+
+.boton:active {
+	position:relative;
+	top:1px;
+}
+
+.boton.grande {
+	width:200px;
+}
+
+p{
+	margin:12px 0;
+}
+
+/*Asientos*/
+
+.columna.ejecutiva{
+	width:16%;
+	margin:1%;
+}
+
+.columna.economica{
+	width:11%;
+	margin:1%;
+}
+
+fieldset.asientos input{
+    display:none; 
+}
+
+
+fieldset.asientos input.boton{
+    display:block;
+}
+
+fieldset.asientos input + label {
+    display:block;
+	height:50px;
+	width:80%;
+	background-color:#004388;
+    border:none;
+	text-align:center;
+	line-height:50px;
+	color:white;
+	font-size:30px;
+	float:left;
+	overflow:hidden;
+	margin-top:20px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	cursor:pointer;
+}
+
+fieldset.asientos input:checked + label { 
+   background-image: none;
+   background-color:#006EB4;
+}
+
+
+
+fieldset.asientos input:disabled + label { 
+   background-color:grey;
+}
+
+.asientos .ocupado{
+	background-color:#E1E1E1;
+	cursor:default;
+}
+
+fieldset.asientos input:checked + label.ocupado{
+	background-color:#E1E1E1;
+}
+
+/*Progreso*/
+
+.progreso{
+	margin:20px auto;
+	width:386px;
+	overflow:hidden;
+}
+
+.progreso .paso{
+	float:left;
+	display:block;
+	width:50px;
+	height:44px;
+	border:6px solid #004388;
+	background-color:white;
+	color:#004388;
+	font-size:20px;
+	font-weight:bold;
+	line-height:44px;
+	text-align:center;
+	-webkit-border-radius: 22px;
+	-moz-border-radius: 22px;
+	border-radius: 22px;
+}
+
+.paso.completo,
+.paso:hover{
+	background-color:#004388;
+	color:white;
+	cursor:pointer;
+}
+
+.progreso .separador{
+	float:left;
+	display:block;
+	width:100px;
+	height:6px;
+	margin:22px 0;
+	background-color:#004388;
+}
+
+/*Datepicker*/
+
+.ui-datepicker select.ui-datepicker-month,
+.ui-datepicker select.ui-datepicker-year{
+	min-width:49%;
+}
+
+.exceso{
+	color:#E32C24;
+}
+
+/* --- Panel de administración --- */
+
+/*Estadísticas: De Barra Completa*/
+.estadisticas_barra-completa{
+	width:100%;
+	padding:20px 0;
+}
+
+.estadisticas h4{ margin:15px 0; font-size:14px; text-transform:uppercase;}
+
+.estadisticas_barra-completa .estadisticas_grafico{
+	border-radius:4px;
+	height:80px;
+	overflow:hidden;
+	clear:both;
+}
+
+.estadisticas_barra-completa .estadisticas_grafico span{
+	display:block;
+	float:left;
+	height:80px;
+	line-height:80px;
+	text-align:center;
+	font-size:24px;
+	color:white;
+}
+
+.estadisticas_referencias{
+	margin:15px 10px;
+}
+
+.estadisticas_referencias>span{
+	padding-left:17px;
+}
+
+.estadisticas_referencias>span>span{
+	background-color:white;
+	padding-left:6px;
+	padding-right:20px;
+}
+
+.pasajes-vendidos      { background-color:#09B809;}
+.pasajes-no-vendidos   { background-color:#E21B1B;}
+
+.reservas-vendidas     { background-color:#09B809; }
+.reservas-caidas       { background-color:#656565; }
+.reservas-no-vendidas  { background-color:#E21B1B; }
+
+.pasajes-primary       { background-color:#006EB4;}
+.pasajes-economy       { background-color:#5992CE;}
+
+/*Estadísticas: De Barras Horizontales en columnas*/
+.estadisticas_barras-horizontales-columnas{ clear:both; padding:15px 0;}
+
+.estadisticas_barras-horizontales-columnas ul{
+	width:30%;
+	margin-right:3%;
+	float:left;
+}
+
+.estadisticas_barras-horizontales-columnas .estadisticas_grafico li{
+	height:40px;
+	clear:both;
+	margin:5px 0;
+}
+
+.estadisticas_barras-horizontales-columnas .estadisticas_grafico strong{
+	width:30%;
+	float:left;
+	height:40px;
+	line-height:40px;
+	font-size:12px;
+	color:black;
+	font-weight:bold;
+}
+
+.estadisticas_barras-horizontales-columnas .estadisticas_grafico li>p{
+	float:left;
+	width:70%;
+	margin:0;
+}
+
+.estadisticas_barras-horizontales-columnas .estadisticas_grafico span{
+	display:block;
+	float:left;
+	clear:both;
+	height:20px;
+}
+
+/*Navegación secundaria*/
+.nav-secundaria{
+	width:400px;
+	text-align:right;
+	position:absolute;
+	bottom:50px;
+	right:0px;
+}
+
+.nav-secundaria a{
+	font-size:12px;
+	color:#004388;
+	text-transform:uppercase;
+}
+
+.nav-secundaria a:hover{ color:#E32C24; }
+
+/*Pie*/
+
+footer{
+	background-color:#004388;
+	color:white;
+	min-height:140px;
+	clear:both;
+}
+
+footer p{
+	padding:30px 0 0 0;
+}
+
+section.buscar,
+section.datos,
+section.reserva,
+fieldset.reserva,
+fieldset.vuelo,
+fieldset.datosPersonales,
+section.pago,
+section.asiento,
+.hide
+{ display:none; }
+
+
+section[data-mode="inicial"] section.buscar{
+	display:block;
+}
+
+section[data-mode="step1"] section.reserva,section[data-mode="step2"] section.reserva,section[data-mode="step3"] section.reserva{
+	display:block;
+}
+
+section[data-mode="step1"] fieldset.reserva{
+	display:block;
+}
+
+section[data-mode="step2"] fieldset.vuelo{
+	display:block;
+}
+
+section[data-mode="step3"] fieldset.datosPersonales{
+	display:block;
+}
+
+section[data-mode="pago"] section.pago{
+	display:block;
+}
+section[data-mode="checkin"] section.asiento{
+	display:block;
+}
+
+section[data-mode="pago"] section.datos{
+	display:block;
+}
+section[data-mode="checkin"] section.datos{
+	display:block;
+}
+
+section[data-mode="last"] section.datos{
+	display:block;
+}
+
+button.qr{
+	display:none;
+}
+
+button.pasaje{
+	display:none;
+}
+
+button.boarding{
+	display:none;
+}
+
+section[data-mode="checkin"] button.pasaje{
+	display:block;
+}
+
+section[data-mode="data_imprimir"] button.pasaje{
+	display:block;
+}
+
+section[data-mode="last"] button.qr{
+	display:block;
+}
+
+section[data-mode="last"] button.pasaje{
+	display:block;
+}
+
+section[data-mode="last"] button.boarding{
+	display:block;
+}
+
+section[data-mode="data_imprimir"] section.datos{
+	display:block;
+}
