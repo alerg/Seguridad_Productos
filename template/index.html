@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es-ar">
+<head>
+	<title>Productos</title>
+	<meta name="description" content="" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="/js/jquery/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="/js/jquery/jquery-ui.min.js"></script>
+	
+	<link rel="icon" href="img/favicon.png" type="image/png" />
+	<link rel="stylesheet" type="text/css" href="css/estilos.css" />
+	<link rel="stylesheet" type="text/css" href="/js/jquery/jquery-ui.theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="/js/jquery/jquery-ui.structure.min.css" />
+</head>
+
+<body>
+	<header class="cabecera">
+		<div class="contenedor">
+			<h1><a href="index"><span>Productos</span></a></h1>
+		</div>
+		<nav class="nav-principal">
+			<div class="contenedor">
+				<ul>
+					<li><a href="/index">Home</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	
+	<script src="js/index.js"></script>
+
+	<section data-interactive="contenedor" class="contenedor contenido">
+		<section class="buscar">		
+			<fieldset>
+				<div class="columna columna--doble">
+					<form data-interactive="formBuscar" class="search">
+						<label for="producto">Producto:</label>
+						<input name="producto" data-interactive='producto' type="text" required>
+						<button class="boton" data-interactive='buscarProducto'>Buscar</button>
+					</form>
+				</div>
+			</fieldset>
+		</section>	
+		<section class="datos">
+			<fieldset>
+				<h2>Productos</h2>
+				<div class="columna columna--triple">
+					<label>Nombre</label>
+				</div>
+				<div class="columna columna--triple">
+					<label>Precio m&aacute;ximo</label>
+				</div>
+				<div class="columna columna--triple">
+					<label>Precio m&iacute;nimo</label>
+				</div>
+				<div class="columna columna--triple">
+					<input name="nombre" class="datos" data-interactive="nombre" type="text" disabled />
+				</div>
+				<div class="columna columna--triple">
+					<input name="maximo" class="datos" data-interactive="maximo" type="text" disabled />
+				</div>
+				<div class="columna columna--triple">
+					<input name="minimo" class="datos" data-interactive="minimo" type="text" disabled />
+				</div>
+			</fieldset>
+		</section>
+	</section>
+	<footer class="pie">
+		<p>&copy;Seguridad - 2014</p>
+	</footer>
+</body>
+
+</html>

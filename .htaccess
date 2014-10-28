@@ -1,0 +1,9 @@
+DirectoryIndex /index.php
+
+IndexIgnore * /configuracion
+IndexIgnore * /core
+IndexIgnore * /entidades
+IndexIgnore * /recursos
+IndexIgnore * api.php
+IndexIgnore * .gitattributes
+IndexIgnore * .gitignore

@@ -3,21 +3,7 @@
     include "/core/Entidad.php";
     include "/core/Recurso.php";
     include "/recursos/Aeropuertos.php";
-    include "/recursos/Vuelos.php";
-    include "/recursos/Pasajes.php";
-    include "/recursos/Pagos.php";
-    include "/recursos/Tipo_Avion.php";
-    include "/recursos/Checkin.php";
-    include "/entidades/Aeropuerto.php";
-    include "/entidades/Recorrido.php";
-    include "/entidades/Vuelo.php";
-    include "/entidades/Avion.php";
-    include "/entidades/Checkin.php";
-    include "/entidades/Pasaje.php";
-    include "/entidades/Pago.php";
-    include "/entidades/TipoAvion.php"; 
-    include "/asiento.php";
-
+    
     header('Content-Type: application/json');
 
     $httpMetodo = $_SERVER['REQUEST_METHOD'];  
@@ -49,7 +35,7 @@
 
     function post($entidadParam){
         switch ($entidadParam) {
-            case 'reservas':
+            case 'productos':
                 $recurso = new Recurso_Pasajes();
                 $recurso->vuelo = $_POST['vuelo'];
                 $recurso->nombre = $_POST['nombre'];
@@ -116,15 +102,7 @@
                     break;
                     default:
                 }
-            break;/*
-            case 'aviones':
-                if($param == 'obtenerPorReserva'){
-                    $recurso = new Recurso_Aviones();
-                    $recurso->idPasaje = $_POST['pasaje'];
-                    $recurso->obtenerPorReserva();
-                    $retorno = $recurso;
-                }
-            break;*/
+            break;
             case 'reservas':
                 $recurso = new Recurso_Pasajes();
                 $retorno = $recurso->obtenerPorId($_GET['id']);
