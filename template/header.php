@@ -1,0 +1,13 @@
+<header class="cabecera">
+	<div class="contenedor">
+		<h1><a href="index"><span>Productos</span></a></h1>
+	</div>
+	<nav class="nav-principal">
+		<div class="contenedor">
+			<ul>
+				<li><a href="/index">Home</a></li>
+				<li class="login"><a href="/login">Login</a></li>
+			</ul>
+		</div>
+	</nav>
+</header>

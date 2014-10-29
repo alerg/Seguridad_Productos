@@ -15,19 +15,9 @@
 </head>
 
 <body>
-	<header class="cabecera">
-		<div class="contenedor">
-			<h1><a href="index"><span>Aerolineas</span></a></h1>
-		</div>
-		<nav class="nav-principal">
-			<div class="contenedor">
-				<ul>
-					<li><a href="/index">Home</a></li>
-					<li class="login">Administradores</li>
-				</ul>
-			</div>
-		</nav>
-	</header>
+	<?php
+    include "/header.php";
+    ?>
 	
 <script src="js/admin.js">
 </script>
