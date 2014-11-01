@@ -73,11 +73,14 @@
     function get($entidadParam, $param){
         $retorno = null;
         switch ($entidadParam) {
-            case 'aeropuertos':
-                $recurso = new Recurso_Aeropuertos();
+            case 'productos':
+                $recurso = new Recurso_Productos();
                 switch($param){
-                    case 'obtenerTodos':
-                        $retorno = $recurso->obtenerTodos();
+                    case 'buscar':
+                        $nombre = $_POST['nombre'];
+                        $semana = $_POST['semana'];
+                        $pagina = $_POST['pagina'];
+                        $retorno = $recurso->buscar($nombre, $semana, $pagina);
                     break;
                     default:
                         $recurso->setCodigo($param);

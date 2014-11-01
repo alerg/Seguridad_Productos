@@ -19,7 +19,7 @@
     include "/header.php";
     ?>
 	
-<script src="js/admin.js">
+<script src="js/login.js">
 </script>
 
 <section data-interactive="contenedor" class="contenedor contenido">
@@ -41,7 +41,7 @@
 </section>
 	
 	<footer class="pie">
-			<p>&copy;Programación Web II - 2014</p>
+			<p>&copy;Seguridad - 2014</p>
 	</footer>
 </body>
 

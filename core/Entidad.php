@@ -103,8 +103,14 @@
 			return $entidades;	
 		}
 
-		protected function ejecutarQuery($query){
+		protected function ejecutarQuery($query, $params){
 			$this->init_conexion();
+			$contador = 0;
+			foreach ($params as $key => $value) {
+				$pasedParam = mysqli_real_escape_string($value);
+				str_replace($$contador, $pasedParam, $query);
+				$contador++;
+			}
 			return $this->conexion->ejecutarQuery($query);
 		}
 	}

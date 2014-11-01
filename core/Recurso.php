@@ -22,5 +22,15 @@
 			}
 			return $recursos;
 		}
+
+		protected function buscar(){
+			$atributos = get_class_vars(get_class($this));
+			foreach ($atributos as $key => $value) {
+	        	if($value != null){
+					$valoresBusqueda[$key] = $this->value;
+	        	}
+	        }
+	        return $this->entidadesARecursos($this->entidad->buscar($valoresBusqueda));
+		}
 	}
 ?>

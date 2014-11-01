@@ -7,7 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="/js/jquery/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="/js/jquery/jquery-ui.min.js"></script>
-	
+	<script src="js/api.js"></script>
+
 	<link rel="icon" href="img/favicon.png" type="image/png" />
 	<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 	<link rel="stylesheet" type="text/css" href="/js/jquery/jquery-ui.theme.min.css" />
@@ -21,16 +22,22 @@
 	
 	<script src="js/index.js"></script>
 
-	<section data-interactive="contenedor" class="contenedor contenido">
+	<section data-interactive="contenedor" class="contenedor contenido" data-mode="">
 		<section class="buscar">		
 			<fieldset>
-				<div class="columna columna--doble">
-					<form data-interactive="formBuscar" class="search">
-						<label for="producto">Producto:</label>
-						<input name="producto" data-interactive='producto' type="text" required>
+				<form data-interactive="formBuscar" class="search">
+					<div class="columna columna--doble">
+							<label for="producto">Producto:</label>
+							<input name="producto" data-interactive='producto' type="text" required>
+					</div>
+					<div class="columna columna--doble">
+						<label for="semana">Semana:</label>
+						<input type="text" id="semana" data-interactive="semana"/>
+					</div>
+					<div class="columna columna--doble">
 						<button class="boton" data-interactive='buscarProducto'>Buscar</button>
-					</form>
-				</div>
+					</div>
+				</form>
 			</fieldset>
 		</section>	
 		<section class="datos">
