@@ -23,16 +23,23 @@
 	<script src="js/index.js"></script>
 
 	<section data-interactive="contenedor" class="contenedor contenido" data-mode="">
-		<section class="buscar">		
+		
+		<div class="contenedor">
+			<h2>Estadísticas de los productos</h2>
+		</div>
+		
+		<section class="buscar">
 			<fieldset>
 				<form data-interactive="formBuscar" class="search">
 					<div class="columna columna--doble">
 							<label for="producto">Producto:</label>
-							<input name="producto" data-interactive='producto' type="text" required>
+							<select id="product" name="product" data-interactive="product">
+								<option value="" selected disabled>Seleccione un producto</option>
+							</select>
 					</div>
 					<div class="columna columna--doble">
 						<label for="semana">Semana:</label>
-						<input type="text" id="semana" data-interactive="semana"/>
+						<input type="text" id="semana" data-interactive="semana" placeholder="Seleccione un día de una semana"/>
 					</div>
 					<div class="columna columna--doble">
 						<button class="boton" data-interactive='buscarProducto'>Buscar</button>
@@ -40,32 +47,52 @@
 				</form>
 			</fieldset>
 		</section>	
+		
 		<section class="datos">
 			<fieldset>
-				<h2>Productos</h2>
-				<div class="columna columna--triple">
-					<label>Nombre</label>
+				<div class="columna columna--simple">
+					<h3 id="nombre" data-interactive="nombre">Notebook</h3>
 				</div>
 				<div class="columna columna--triple">
 					<label>Precio m&aacute;ximo</label>
+					<span id="maximo" class="estadistica" data-interactive="maximo">$43.000</span>
 				</div>
 				<div class="columna columna--triple">
 					<label>Precio m&iacute;nimo</label>
+					<span id="minimo" class="estadistica" data-interactive="minimo">$1.640</span>
 				</div>
 				<div class="columna columna--triple">
-					<input name="nombre" class="datos" data-interactive="nombre" type="text" disabled />
-				</div>
-				<div class="columna columna--triple">
-					<input name="maximo" class="datos" data-interactive="maximo" type="text" disabled />
-				</div>
-				<div class="columna columna--triple">
-					<input name="minimo" class="datos" data-interactive="minimo" type="text" disabled />
+					<label>Precio promedio</label>
+					<span id="promedio" class="estadistica" data-interactive="promedio">$5.400</span>
 				</div>
 			</fieldset>
 		</section>
+		
+		<section class="caja-comentarios contenedor">
+			<h4>Comentarios</h4>
+			
+			<div class="comentario">
+				<header>Anónimo</header>
+				<p>Este es el comentario de un usuario.</p>
+				<footer>01/11/2014 &nbsp;10:37hs</footer>
+			</div>
+			
+			<div class="comentario">
+				<header>Anónimo</header>
+				<p>Este es el comentario de otro usuario. Es un comentario más largo que el anterior, lo suficiente como para abarcar varias líneas y poder ver el interlineado que tienen los comentarios.</p>
+				<footer>01/11/2014 &nbsp;10:35hs</footer>
+			</div>
+			
+			<div class="comentario">
+				<header>Anónimo</header>
+				<p>Este es el comentario de un usuario.</p>
+				<footer>01/11/2014 &nbsp;9:21hs</footer>
+			</div>
+		</section>
+		
 	</section>
 	<footer class="pie">
-		<p>&copy;Seguridad - 2014</p>
+		<p>&copy;Seguridad y Calidad de Aplicaciones Web - 2014</p>
 	</footer>
 </body>
 

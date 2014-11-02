@@ -25,15 +25,23 @@
 <section data-interactive="contenedor" class="contenedor contenido">
 	<section>
 		<fieldset>
-			<h2>Login</h2>
+			<h2>Registrarse</h2>
 			<div class="columna columna--doble">
 				<label for="usuario">Usuario:</label>
 				<input name="usuario" class="datos" data-interactive="usuario" type="text"/>
-				<label for="contrasena">Contraseña:</label>
-				<input name="contrasena" class="datos" data-interactive="contrasena" type="password"/>
+				
+				<label for="nombre">Nombre y apellido:</label>
+				<input name="nombre" class="datos" data-interactive="nombre" type="text"/>
 			</div>
 			<div class="columna columna--doble">
-				<button class="boton" data-interactive="login">Loguearse</button>
+				<label for="contrasena">Contraseña:</label>
+				<input name="contrasena" class="datos" data-interactive="contrasena" type="password"/>
+				
+				<label for="contrasena2">Repetir contraseña:</label>
+				<input name="contrasena2" class="datos" data-interactive="contrasena2" type="password"/>
+			</div>
+			<div class="columna columna--simple">
+				<button class="boton" data-interactive="">Registrarse</button>
 			</div>
 		</fieldset>
 	</section>

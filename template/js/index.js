@@ -2,14 +2,15 @@ jQuery(document).ready(function(){
 
 	$('[data-interactive="semana"]').datepicker({ 
 		showWeek:true,
-		firstDay: 1,
 		dateFormat: "dd/mm/yy",
 		dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
 		monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
 		monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec" ],
 		changeYear: true,
 		changeMonth: true,
-		yearRange: "-110:-18"
+		maxDate:0,
+		minDate: new Date(2014, 9, 01),
+		weekHeader:'Semana'
 	});
 
 	jQuery('[data-interactive="formBuscar"]').submit(function(e){
@@ -18,7 +19,7 @@ jQuery(document).ready(function(){
 		var nombre = jQuery('[data-interactive="producto"]').val();
 		producto.obtenerTodosPorNombre(nombre, function(data){
 			if(data == false){
-				alert('No existen productos con ese nombre');
+				alert('No existen productos con ese nombre.');
 			}else{
 
 			}
