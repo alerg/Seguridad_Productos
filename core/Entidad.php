@@ -107,8 +107,8 @@
 			$this->init_conexion();
 			$contador = 0;
 			foreach ($params as $key => $value) {
-				$pasedParam = mysqli_real_escape_string($value);
-				str_replace($$contador, $pasedParam, $query);
+				$pasedParam = $this->conexion->escapar($value);
+				$query =  str_replace('$'.$contador, $pasedParam, $query);
 				$contador++;
 			}
 			return $this->conexion->ejecutarQuery($query);

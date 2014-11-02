@@ -2,10 +2,9 @@
 	//Representa la tabla recorridos de SQL.
 	class Entidad_Producto extends Entidad{
 
-		public $id;
-		public $nombre;
+		public $idProducto;
+		public $idTipoProducto;
 		public $descripcion;
-		public $precio;
 
 		public function __construct() {
 			//Llama al constructor de Entidad
@@ -14,27 +13,48 @@
 			//Se marca cual es el id de la tabla
 		}
 
-		public function buscar($nombre, $semana, $pagina){
+		public function buscar($descripcion, $semana, $pagina){
 			$query ="SELECT p.*, pr.* ".
 					"FROM producto as p ".
-					"INNER JOIN precio as pr on pr.idProducto = p.id AND pr.semana = $1 ".
-					"WHERE p.nombre like '%$2%'";
+					"INNER JOIN precio as pr on pr.idProducto = p.idProducto";
+			$index = 0;
+			if($pagina == null){
+				$pagina = 1;
+			}
 
-			$registros = parent::ejecutarQuery($query, array($nombre, $semana));
+			$arrayFiltros = array($descripcion);
 
-			$paginas = len($registros) / 10;
+			if($semana!=null){
+				array_push($arrayFiltros, $semana);
+				$query = $query . " AND pr.semana = $" . $index;
+				$index++;
+			}
+
+			$query = $query . " WHERE p.descripcion like '%$". $index ."%'";
+
+			$registros = parent::ejecutarQuery($query, $arrayFiltros);
+
+			$cantidadRegistros = count($registros);
+			$paginas = abs($cantidadRegistros / 10) + 1;
 			$resultado = array();
 			if($paginas >= $pagina){
-				for ($i=1; $i <= 10; $i++) { 
-					$index = $i * $pagina;
-					if($index < len($registro)){
-						array_push($resultado, $registros[$index]);
-					}else{
-						$i = 11;
+				for ($e=1; $e <= $paginas; $e++) {
+					for ($i=0; $i<=9; $i++) {
+						$index = $i * $pagina;
+						if($index < $cantidadRegistros){
+							array_push($resultado, $registros[$index]);
+						}else{
+							$i = 10;
+						}
 					}
 				}
 			}
 
+			return $resultado;
+		}
+
+		private function getResultadosPorPagina($registros, $pagina){
+			
 			return $resultado;
 		}
 	}

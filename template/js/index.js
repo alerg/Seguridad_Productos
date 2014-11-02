@@ -16,11 +16,15 @@ jQuery(document).ready(function(){
 		e.preventDefault();
 		var producto = new Producto();
 		var nombre = jQuery('[data-interactive="producto"]').val();
-		producto.obtenerTodosPorNombre(nombre, function(data){
+		//var semana = jQuery('[data-interactive="semana"]').val();
+
+		producto.buscar(nombre, null, null, function(data){
 			if(data == false){
 				alert('No existen productos con ese nombre');
 			}else{
-
+				for(var index in data){
+					console.log(data[index]);
+				}
 			}
 		});
 	});

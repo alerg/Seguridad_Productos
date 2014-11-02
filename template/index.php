@@ -30,10 +30,12 @@
 							<label for="producto">Producto:</label>
 							<input name="producto" data-interactive='producto' type="text" required>
 					</div>
+					<!--
 					<div class="columna columna--doble">
 						<label for="semana">Semana:</label>
-						<input type="text" id="semana" data-interactive="semana"/>
+						<input type="text" id="semana" data-interactive="semana" required/>
 					</div>
+					-->
 					<div class="columna columna--doble">
 						<button class="boton" data-interactive='buscarProducto'>Buscar</button>
 					</div>

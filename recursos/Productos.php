@@ -1,39 +1,31 @@
 <?php
 	class Recurso_Productos{
 		public $id;
-		public $nombre;
+		public $tipo;
 		public $descripcion;
 
 		private $entidad;
 
 		public function __construct() {
 			$this->id = null;
-			$this->nombre = null;
+			$this->tipo = null;
 			$this->descripcion = null;
-			$this->precio = null;
 			$this->entidad = new Entidad_Producto();
 		}
 
-		public function buscar($nombre, $semana, $pagina){
-			$registros = $entidad->buscar($nombre, $semana, $pagina);
-			foreach ($registros as $key => $value) {
-				$value->precio = $this->getPrecio($value->id);
-			}
+		public function buscar($descripcion, $semana, $pagina){
+			$registros = $this->entidad->buscar($descripcion, $semana, $pagina);
+			return $registros;
 		}
 
 		public function crear(){
-			$this->entidad->id = $this->id;
+			$this->entidad->idProducto = $this->id;
 			$this->entidad->descripcion = $this->descripcion;
-			$this->entidad->nombre = $this->nombre;
+			$this->entidad->idTipoProducto = $this->tipo;
 
 			$this->id = (string)$this->entidad->crear();
 
 			return $this;
-		}	
-
-		private function getPrecio($producto){
-			$entidad = new Entidad_Precio();
-			return $entidad->obtenerPorProducto($producto);	
 		}
 	}
 ?>

@@ -20,7 +20,7 @@ var Producto = function (){}
 Producto.prototype = {
 	buscar : function(nombre, semana, pagina, cb){
 		var that = this;
-		jQuery.get('/api/producto/buscar',
+		jQuery.get('/api/productos/buscar',
 			{
 				'nombre':nombre,
 				'semana':semana,

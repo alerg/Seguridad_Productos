@@ -15,6 +15,14 @@
 			$this->entidad = new Entidad_Precio();
 		}
 
+		public function obtenerTodosPorProducto(){
+			if($this->id != null){
+				parent::setFiltrarPor(array(array('id', $this->codigo)));
+			}
+			$entidades = parent::obtenerTodos();
+			return $entidades;
+		}
+
 		public function buscar($producto){
 			$registros = $entidad->buscar($nombre, $semana, $pagina);
 			foreach ($registros as $key => $value) {

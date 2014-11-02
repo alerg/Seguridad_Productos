@@ -2,7 +2,9 @@
     include "/core/ConexionMySQL.php";
     include "/core/Entidad.php";
     include "/core/Recurso.php";
-    include "/recursos/Aeropuertos.php";
+    include "/entidades/Producto.php";
+    include "/recursos/Productos.php";
+    include "/recursos/Precios.php";
     
     header('Content-Type: application/json');
 
@@ -51,21 +53,6 @@
                     //Modificar
                 }
             break;
-            case 'pagos':
-                $recurso = new Recurso_Pagos();
-                $recurso->idPasaje = $_POST['pasaje'];
-                $recurso->formaPago = $_POST['formaPago'];
-                $recurso->crear();
-                return json_encode($recurso);
-            break;
-            case 'checkin':
-                $recurso = new Recurso_Checkin();
-                $recurso->pasaje = $_POST['pasaje'];
-                $recurso->columna = $_POST['columna'];
-                $recurso->fila = $_POST['fila'];
-                $recurso->crear();
-                return json_encode($recurso);
-            break;
         }
         return json_encode($recurso);
     }
@@ -77,48 +64,14 @@
                 $recurso = new Recurso_Productos();
                 switch($param){
                     case 'buscar':
-                        $nombre = $_POST['nombre'];
-                        $semana = $_POST['semana'];
-                        $pagina = $_POST['pagina'];
+                        $nombre = $_GET['nombre'];
+                        $semana = $_GET['semana'];
+                        $pagina = $_GET['pagina'];
                         $retorno = $recurso->buscar($nombre, $semana, $pagina);
                     break;
                     default:
                         $recurso->setCodigo($param);
                         $retorno = $recurso->obtener();
-                }
-            break;
-            case 'vuelos':
-                $recurso = new Recurso_Vuelos();
-                switch($param){
-                    case 'obtenerTodos':
-                    $origen = $_GET['origen'];
-                        $destino = $_GET['destino'];
-                        $fecha = $_GET['fecha'];
-                        if($fecha <> null){
-                            $parsedDate = date_parse_from_format('d/m/Y', $fecha);
-                            $recurso->fecha = $parsedDate['year'] .'-'. $parsedDate['month'] .'-'. $parsedDate['day'];
-                        }
-                        $retorno = $recurso->obtenerPorRecorrido($origen, $destino);
-                    break;
-                    case 'obtener';
-                        $retorno = $recurso->obtenerPorId($_GET['id']);
-                    break;
-                    default:
-                }
-            break;
-            case 'reservas':
-                $recurso = new Recurso_Pasajes();
-                $retorno = $recurso->obtenerPorId($_GET['id']);
-                if($retorno <> false)
-                    $retorno = $recurso;
-            break;
-            case 'checkin':
-                switch($param){
-                    case 'habilitadoCheckin';
-                        $recurso = new Recurso_Checkin();
-                        $retorno = $recurso->habilitadoCheckin($_GET['reserva']);
-                    break;
-                    default:
                 }
             break;
         }
