@@ -1,0 +1,31 @@
+/*querys productos*/
+/*retorna todos los productos*/
+SELECT * FROM scaw.Producto;
+
+/*retorna el producto a partir de su @IdProducto;
+SELECT * FROM scaw.Producto WHERE idproducto = @IdProducto;
+
+/*retorna todos los productos asociados a un @IdTipoProducto en particular*/
+SELECT * FROM scaw.TipoProducto tp inner join scaw.Producto p on tp.IdTipoProducto = p.IdProducto
+WHERE tp.IdTipoProducto = @IdTipoProducto;
+
+/*querys precios*/
+/*retorna todos los precios de un @IdProducto en particular*/
+SELECT * FROM scaw.Precio 
+WHERE IdProducto = @IdProducto;
+
+/*retorna el precio maximo, precio minimo, precio promedio para un @IdProducto en particular para la semana actual*/
+SELECT MIN(monto), MAX(monto), AVG(monto) 
+FROM scaw.Precio
+WHERE IdProducto=@IdProducto
+AND fechaprecio BETWEEN adddate(curdate(), INTERVAL 1-DAYOFWEEK(curdate()) DAY) and adddate(curdate(), INTERVAL 7-DAYOFWEEK(curdate()) DAY);
+
+/*querys comentarios*/
+/*retorna todos los comentarios para un @IdProducto en particular*/
+SELECT c.* , 
+CASE 
+WHEN (select ca.nickname from ComentarioAnonimo ca where ca.IdComentario = c.IdComentario) IS NULL THEN (select u.email from ComentarioUsuarioRegistrado cur INNER JOIN Usuario u on cur.idusuario = u.idusuario where cur.IdComentario = c.IdComentario) 
+END AS nick 
+FROM scaw.Comentario c 
+WHERE IdProducto = @IdProducto 
+ORDER BY FechaComentario DESC
