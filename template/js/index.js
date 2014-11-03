@@ -34,6 +34,17 @@ jQuery(document).ready(function(){
 					jQuery('[data-interactive="minimo"]').html(data.precio.minimo);
 					jQuery('[data-interactive="promedio"]').html(data.precio.promedio);
 				}
+				if(data.comentarios){
+					for(var index in data.comentarios){
+						var comentarioHTML = '<div class="comentario">'+
+							'<header>'+ data.comentarios[index].id +'</header>'+
+							'<p>'+ data.comentarios[index].comentario +'.</p>'+
+							'<footer>'+ data.comentarios[index].fecha +'hs.</footer>'+
+						'</div>';
+						jQuery('[data-interactive="comentarios"]').append(comentarioHTML);		
+					}
+
+				}
 				jQuery('[data-interactive="contenedor"]').attr('data-mode', 'datos');
 			}
 		});

@@ -63,26 +63,8 @@
 				</div>
 			</fieldset>
 		</section>
-		<section class="caja-comentarios contenedor">
+		<section class="caja-comentarios contenedor" data-interactive="comentarios">
 			<h4>Comentarios</h4>
-			
-			<div class="comentario">
-				<header>Anónimo</header>
-				<p>Este es el comentario de un usuario.</p>
-				<footer>01/11/2014 &nbsp;10:37hs</footer>
-			</div>
-			
-			<div class="comentario">
-				<header>Anónimo</header>
-				<p>Este es el comentario de otro usuario. Es un comentario más largo que el anterior, lo suficiente como para abarcar varias líneas y poder ver el interlineado que tienen los comentarios.</p>
-				<footer>01/11/2014 &nbsp;10:35hs</footer>
-			</div>
-			
-			<div class="comentario">
-				<header>Anónimo</header>
-				<p>Este es el comentario de un usuario.</p>
-				<footer>01/11/2014 &nbsp;9:21hs</footer>
-			</div>
 		</section>
 		
 	</section>

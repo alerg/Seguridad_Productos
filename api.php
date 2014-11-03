@@ -2,9 +2,11 @@
     include "/core/ConexionMySQL.php";
     include "/core/Entidad.php";
     include "/core/Recurso.php";
+    include "/entidades/Comentario.php";
     include "/entidades/Precio.php";
     include "/entidades/Producto.php";
     include "/lib/Metricas.php";
+    include "/recursos/Comentarios.php";
     include "/recursos/Productos.php";
     include "/recursos/Precios.php";
     
@@ -84,6 +86,12 @@
                         $precios = $precio->obtenerPorSemana($fecha);
                         if(count($precios)> 0){
                             $retorno->precio = new Metricas($precios);
+                        }
+                        $comentario = new Recurso_Comentarios();
+                        $comentario->idProducto = $_GET['id'];
+                        $comentarios = $comentario->obtenerPorId();
+                        if(count($comentarios)> 0){
+                            $retorno->comentarios = $comentarios;
                         }
                     break;
                 }
