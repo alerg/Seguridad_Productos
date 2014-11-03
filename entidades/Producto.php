@@ -2,9 +2,9 @@
 	//Representa la tabla recorridos de SQL.
 	class Entidad_Producto extends Entidad{
 
-		public $idProducto;
-		public $idTipoProducto;
-		public $descripcion;
+		public $IdProducto;
+		public $IdTipoProducto;
+		public $Descripcion;
 
 		public function __construct() {
 			//Llama al constructor de Entidad
@@ -13,49 +13,22 @@
 			//Se marca cual es el id de la tabla
 		}
 
-		public function buscar($descripcion, $semana, $pagina){
-			$query ="SELECT p.*, pr.* ".
-					"FROM producto as p ".
-					"INNER JOIN precio as pr on pr.idProducto = p.idProducto";
-			$index = 0;
-			if($pagina == null){
-				$pagina = 1;
+		public function obtener(){
+			if($this->IdProducto != null){
+				parent::setFiltrarPor(array(array('IdProducto', $this->IdProducto)));
 			}
 
-			$arrayFiltros = array($descripcion);
-
-			if($semana!=null){
-				array_push($arrayFiltros, $semana);
-				$query = $query . " AND pr.semana = $" . $index;
-				$index++;
-			}
-
-			$query = $query . " WHERE p.descripcion like '%$". $index ."%'";
-
-			$registros = parent::ejecutarQuery($query, $arrayFiltros);
-
-			$cantidadRegistros = count($registros);
-			$paginas = abs($cantidadRegistros / 10) + 1;
-			$resultado = array();
-			if($paginas >= $pagina){
-				for ($e=1; $e <= $paginas; $e++) {
-					for ($i=0; $i<=9; $i++) {
-						$index = $i * $pagina;
-						if($index < $cantidadRegistros){
-							array_push($resultado, $registros[$index]);
-						}else{
-							$i = 10;
-						}
-					}
-				}
-			}
-
-			return $resultado;
+			$entidad = parent::obtener();
+			if(count($entidad) == 1)
+				return $entidad[0];
+			else
+				return null;
 		}
 
-		private function getResultadosPorPagina($registros, $pagina){
-			
-			return $resultado;
+		public function obtenerTodos(){
+			$entidades = parent::obtenerTodos();
+			return $entidades;
 		}
+
 	}
 ?>

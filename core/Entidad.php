@@ -111,7 +111,10 @@
 				$query =  str_replace('$'.$contador, $pasedParam, $query);
 				$contador++;
 			}
-			return $this->conexion->ejecutarQuery($query);
+			//echo $query;
+			$registros = $this->conexion->ejecutarQuery($query);
+			
+			return $this->registroAEntidad($registros);
 		}
 	}
 ?>

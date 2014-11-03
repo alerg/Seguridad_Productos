@@ -2,7 +2,9 @@
     include "/core/ConexionMySQL.php";
     include "/core/Entidad.php";
     include "/core/Recurso.php";
+    include "/entidades/Precio.php";
     include "/entidades/Producto.php";
+    include "/lib/Metricas.php";
     include "/recursos/Productos.php";
     include "/recursos/Precios.php";
     
@@ -63,15 +65,27 @@
             case 'productos':
                 $recurso = new Recurso_Productos();
                 switch($param){
-                    case 'buscar':
-                        $nombre = $_GET['nombre'];
-                        $semana = $_GET['semana'];
-                        $pagina = $_GET['pagina'];
-                        $retorno = $recurso->buscar($nombre, $semana, $pagina);
+                    case 'obtenerTodos':
+                        $retorno = $recurso->obtenerTodos();
                     break;
-                    default:
-                        $recurso->setCodigo($param);
+                    case 'obtenerDetalle':
+                        $recurso->id = $_GET['id'];
                         $retorno = $recurso->obtener();
+                        
+                        $precio = new Recurso_Precios();
+                        $precio->idProducto = $_GET['id'];
+
+                        $fecha = $_GET['fecha'];
+                        if($fecha == null){
+                            $fecha = new DateTime("now");
+                        }else{
+                            $fecha = DateTime::createFromFormat('d/m/Y', $fecha);    
+                        }
+                        $precios = $precio->obtenerPorSemana($fecha);
+                        if(count($precios)> 0){
+                            $retorno->precio = new Metricas($precios);
+                        }
+                    break;
                 }
             break;
         }

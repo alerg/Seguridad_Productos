@@ -18,14 +18,9 @@ Usuario.prototype = {
 var Producto = function (){}
 
 Producto.prototype = {
-	buscar : function(nombre, semana, pagina, cb){
+	obtenerTodos: function(cb){
 		var that = this;
-		jQuery.get('/api/productos/buscar',
-			{
-				'nombre':nombre,
-				'semana':semana,
-				'pagina':pagina
-			}, 
+		jQuery.get('/api/productos/obtenerTodos',
 			function(data){
 				that = data;
 				if(cb)
@@ -33,9 +28,9 @@ Producto.prototype = {
 			}
 		);
 	},
-	obtener: function(cb){
+	obtenerDetalle: function(data, cb){
 		var that = this;
-		jQuery.get('/api/productos/obtener', {'id':this.id}, function(data){
+		jQuery.get('/api/productos/obtenerDetalle',{'id':data.id, fecha:data.fecha}, function(data){
 			that = data;
 			if(cb)
 				cb(that);

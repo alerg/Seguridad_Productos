@@ -1,48 +1,39 @@
 <?php
 	class Recurso_Precios{
-		public $id;
-		public $semana;
-		public $valor;
-		public $producto;
-		public $usuario;
+		public $idProducto;
+		public $fecha;
+		public $monto;
+		public $idUsuario;
 
 		private $entidad;
 
 		public function __construct() {
-			$this->id = null;
-			$this->semana = null;
-			$this->valor = null;
+			$this->idProducto = null;
+			$this->fecha = null;
+			$this->monto = null;
+			$this->idUsuario = null;
 			$this->entidad = new Entidad_Precio();
 		}
 
-		public function obtenerTodosPorProducto(){
-			if($this->id != null){
-				parent::setFiltrarPor(array(array('id', $this->codigo)));
+		public function obtenerPorSemana($fecha){
+			$this->entidad->IdProducto = $this->idProducto;
+			$entidades = $this->entidad->obtenerPorSemana($fecha);
+			$recursos = array();
+			foreach ($entidades as $key => $value) {
+				$recurso = new Recurso_Precios();
+				$recurso->idProducto = $value->IdProducto;
+				$recurso->idUsuario = $value->IdUsuario;
+				$recurso->monto = $value->Monto;
+
+				array_push($recursos, $recurso);
 			}
-			$entidades = parent::obtenerTodos();
-			return $entidades;
+			return $recursos;
 		}
 
-		public function buscar($producto){
-			$registros = $entidad->buscar($nombre, $semana, $pagina);
-			foreach ($registros as $key => $value) {
-				$value->precio = $this->getPrecio($value->id);
+		public function calcularDatos($precios){
+			foreach ($precios as $key => $value) {
+
 			}
-		}
-
-		public function crear(){
-			$this->entidad->id = $this->id;
-			$this->entidad->semana = $this->descripcion;
-			$this->entidad->nombre = $this->nombre;
-
-			$this->id = (string)$this->entidadPasaje->crear();
-
-			return $this;
-		}	
-
-		private function getPrecio($producto){
-			$entidad = new Entidad_Precio();
-			return $entidad->obtenerPorProducto($producto);	
 		}
 	}
 ?>
