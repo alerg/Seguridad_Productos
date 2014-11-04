@@ -2,6 +2,7 @@
 	//error_reporting(E_ERROR);
 	class ConexionMySQL{
 		private $conexion;
+		private $insert_id;
 		//private $nombreTabla;
 		//private $condicion; 
 		
@@ -15,12 +16,12 @@
 			$query = 'SELECT * FROM `' .$nombreTabla .'`';
 			if(count($condiciones)>0){
 				$query .= ' WHERE ';
-				$and = false;
+				$and = FALSE;
 				for ($index=0; $index < count($condiciones); $index++) { 
 					if($and)
 						$query .= ' AND ';
 					else
-						$and = true;
+						$and = TRUE;
 
 					//$query .= '`'. $condicion[$key][0] .'`=\''. $condicion[$key][1] .'\'';
 
@@ -36,22 +37,22 @@
 		}
 
 		public function modificar($tabla, $campos, $condiciones){
-			$primero = true;
+			$primero = TRUE;
 			$query = 'UPDATE `'. $tabla .'` SET ';
 			foreach ($campos as $key => $value) {
 				if($primero){
-					$primero = false;
+					$primero = FALSE;
 				}else{
 					$query .= ',';	
 				}
 				$query .= '`'.$key . '`=\'' . $value .'\'';
 			}
-			$primero = true;
+			$primero = TRUE;
 			if(count($condiciones)>0){
 				$query .= ' WHERE ';
 				for ($index=0; $index < count($condiciones); $index++) { 
 					if($primero){
-						$primero = false;
+						$primero = FALSE;
 					}else{
 						$query .= ' AND ';	
 					}
@@ -69,11 +70,11 @@
 		}
 
 		public function crear($tabla, $campos){
-			$primero = true;
+			$primero = TRUE;
 			$query = 'INSERT INTO '. $tabla .'(';
 			foreach ($campos as $key => $value) {
 				if($primero){
-					$primero = false;
+					$primero = FALSE;
 				}else{
 					$query .= ',';	
 				}
@@ -81,18 +82,21 @@
 			}
 			$query .= ')';
 			$query .= ' VALUES (';
-			$primero = true;
+			$primero = TRUE;
 			foreach ($campos as $key => $value) {
 				if($primero){
-					$primero = false;
+					$primero = FALSE;
 				}else{
 					$query .= ',';	
 				}
-				$query .= '\''.$value . '\'';
+				$query .= '\''.$this->escapar($value) . '\'';
 			}
 			$query .= ')';
-			$this->ejecutarQuery($query);
-			return $this->conexion->insert_id;
+			$retorno = $this->ejecutarQuery($query);
+			if($retorno != FALSE || $this->insert_id != null){
+				return $this->insert_id;
+			}
+			return FALSE;
 		}
 
 	//Metodos privados
@@ -102,6 +106,7 @@
 				$matriz = array(); 
 			    /* obtener array asociativo */
 			    $retorno = $this->conexion->use_result();
+				$this->insert_id = $this->conexion->insert_id;
 			    if($retorno){
 				    while ($fila = $retorno->fetch_assoc()) {
 				    	array_push($matriz, $fila);
@@ -112,7 +117,7 @@
 					return $matriz;
 				}
 			}
-			return false;
+			return FALSE;
 		}
 
 		public function field_count(){

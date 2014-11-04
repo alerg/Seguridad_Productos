@@ -27,8 +27,8 @@
 		<fieldset>
 			<h2>Login</h2>
 			<div class="columna columna--doble">
-				<label for="usuario">Usuario:</label>
-				<input name="usuario" class="datos" data-interactive="usuario" type="text"/>
+				<label for="email">Email:</label>
+				<input name="email" class="datos" data-interactive="email" type="text"/>
 				<label for="contrasena">Contraseña:</label>
 				<input name="contrasena" class="datos" data-interactive="contrasena" type="password"/>
 			</div>

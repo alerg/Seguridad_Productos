@@ -1,16 +1,32 @@
 //Necesita CORE
-var Usuario = function (usuario, contraseña){
-	this.usuario = usuario;
-	this.contraseña = contraseña;
+var Usuario = function (){
+	this.email = null;
+	this.contrasena = null;
+	this.nombre = null;
+	this.apellido = null;
 }
 
 Usuario.prototype = {
 	login : function(cb){
 		var that = this;
-		jQuery.get('/api/usuario/login', {}, function(response){
+		jQuery.get('/api/usuarios/login', {
+			email: this.email,
+			contrasena: this.contrasena
+		}).always(function(resp){
 			if(cb)
-				cb(that);
+				cb(resp);
 		});
+	},
+	crear: function(cb){
+		jQuery.post('/api/usuarios/crear', {
+			email: this.email,
+			contrasena: this.contrasena,
+			nombre: this.nombre,
+			apellido: this.apellido
+		}, function(response){
+			if(cb)
+				cb(response);
+		}, "json"); 
 	}
 }
 

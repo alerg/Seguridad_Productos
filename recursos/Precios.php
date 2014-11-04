@@ -29,11 +29,5 @@
 			}
 			return $recursos;
 		}
-
-		public function calcularDatos($precios){
-			foreach ($precios as $key => $value) {
-
-			}
-		}
 	}
 ?>

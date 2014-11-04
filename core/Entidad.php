@@ -59,10 +59,10 @@
 		        $hijo = get_class_vars(get_class($this));  
 		        $atributos = array();
 		        foreach ($hijo as $keyHijo => $valueHijo) {
-		        	$exists = false;
+		        	$exists = FALSE;
 		        	foreach ($ancestro as $ancestroKey => $ancestroValue) {
 		            	if ($keyHijo == $ancestroKey) {
-		        			$exists = true;
+		        			$exists = TRUE;
 			            }
 					}
 					if(!$exists){

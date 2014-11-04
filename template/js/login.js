@@ -1,12 +1,20 @@
 jQuery(document).ready(function(){
 	jQuery('[data-interactive="login"]').click(function(e){
-		var user = jQuery('[data-interactive="usuario"]').val();
+		var email = jQuery('[data-interactive="email"]').val();
 		var password = jQuery('[data-interactive="contrasena"]').val();
 
-		if(user == 'admin' && password == 'admin'){
-			window.location = '/menu';
-		}else{
-			alert('El usuario o la contraseña son incorrectos.');
-		}
+		var usuario = new Usuario();
+		usuario.email = email;
+		usuario.password = password;
+		usuario.login(function(data){
+			switch(data.status){
+				case 200:
+					location.href = "/index";
+				break;
+				case 401:
+					alert("Verifique los datos ingresados");
+				break;
+			}
+		}); 
 	});
 });

@@ -7,6 +7,7 @@
 			<ul>
 				<li><a href="/index">Home</a></li>
 				<li class="login"><a href="/login">Login</a></li>
+				<li class="login"><a href="/registro">Registro</a></li>
 			</ul>
 		</div>
 	</nav>

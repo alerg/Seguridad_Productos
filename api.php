@@ -5,10 +5,12 @@
     include "/entidades/Comentario.php";
     include "/entidades/Precio.php";
     include "/entidades/Producto.php";
+    include "/entidades/Usuario.php";
     include "/lib/Metricas.php";
     include "/recursos/Comentarios.php";
     include "/recursos/Productos.php";
     include "/recursos/Precios.php";
+    include "/recursos/Usuarios.php";
     
     header('Content-Type: application/json');
 
@@ -41,29 +43,30 @@
 
     function post($entidadParam){
         switch ($entidadParam) {
-            case 'productos':
-                $recurso = new Recurso_Pasajes();
-                $recurso->vuelo = $_POST['vuelo'];
-                $recurso->nombre = $_POST['nombre'];
-                $recurso->email = $_POST['email'];
-                $recurso->fecha = $_POST['fecha'];
-                $recurso->dni = $_POST['dni'];
-                $recurso->categoria = $_POST['categoria'];
-                if($_POST['id'] == null){
-                    $retorno = $recurso->crear();
-                    return json_encode($recurso); 
+            case 'usuarios':
+                $recurso = new Recurso_Usuarios();
+                $exitoso = $recurso->crear($_POST['email'], $_POST['contrasena'], $_POST['nombre'], $_POST['apellido']);
+                if($exitoso){
+                    $retorno = array("id"=>$recurso->id);
                 }else{
-                    $recurso->id = $_POST['id'];
-                    //Modificar
+                    $retorno = array();
                 }
+                return json_encode($retorno, JSON_FORCE_OBJECT);
             break;
         }
-        return json_encode($recurso);
     }
 
     function get($entidadParam, $param){
         $retorno = null;
         switch ($entidadParam) {
+            case 'usuarios':
+                $recurso = new Recurso_Usuarios();
+                $autorizado = $recurso->login($_GET['email'], $_GET['contrasena']);
+                if(! $autorizado){
+                    http_response_code(401);    
+                }
+                return json_encode(array(), JSON_FORCE_OBJECT);
+            break;
             case 'productos':
                 $recurso = new Recurso_Productos();
                 switch($param){
@@ -93,10 +96,11 @@
                         if(count($comentarios)> 0){
                             $retorno->comentarios = $comentarios;
                         }
+                        
+                        return json_encode($retorno);
                     break;
                 }
             break;
         }
-        return json_encode($retorno);
     }
  ?>

@@ -8,6 +8,7 @@
 	<script type="text/javascript" src="/js/jquery/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="/js/jquery/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="/js/api.js"></script>
+
 	<link rel="icon" href="img/favicon.png" type="image/png" />
 	<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 	<link rel="stylesheet" type="text/css" href="/js/jquery/jquery-ui.theme.min.css" />
@@ -19,7 +20,7 @@
     include "/header.php";
     ?>
 	
-<script src="js/login.js">
+<script src="js/registro.js">
 </script>
 
 <section data-interactive="contenedor" class="contenedor contenido">
@@ -27,11 +28,14 @@
 		<fieldset>
 			<h2>Registrarse</h2>
 			<div class="columna columna--doble">
-				<label for="usuario">Usuario:</label>
-				<input name="usuario" class="datos" data-interactive="usuario" type="text"/>
+				<label for="email">Email:</label>
+				<input name="email" class="datos" data-interactive="email" type="text"/>
 				
-				<label for="nombre">Nombre y apellido:</label>
+				<label for="nombre">Nombre:</label>
 				<input name="nombre" class="datos" data-interactive="nombre" type="text"/>
+
+				<label for="apellido">Apellido:</label>
+				<input name="apellido" class="datos" data-interactive="apellido" type="text"/>
 			</div>
 			<div class="columna columna--doble">
 				<label for="contrasena">Contraseña:</label>
@@ -41,7 +45,7 @@
 				<input name="contrasena2" class="datos" data-interactive="contrasena2" type="password"/>
 			</div>
 			<div class="columna columna--simple">
-				<button class="boton" data-interactive="">Registrarse</button>
+				<button class="boton" data-interactive="registrar">Registrarse</button>
 			</div>
 		</fieldset>
 	</section>
