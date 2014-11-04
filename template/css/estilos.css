@@ -553,6 +553,11 @@ section[data-mode="datos"] form.search{
 	display:block;
 }
 
+section[data-mode="sin precio"] section.caja-comentarios,
+section[data-mode="sin precio"] form.search{
+	display:block;
+}
+
 section[data-mode="step1"] section.reserva,section[data-mode="step2"] section.reserva,section[data-mode="step3"] section.reserva{
 	display:block;
 }

@@ -13,8 +13,23 @@ jQuery(document).ready(function(){
 		weekHeader:'Semana'
 	});
 
+    $('[data-interactive="semana"]').datepicker("setDate", new Date());
+
 	jQuery('[data-interactive="formBuscar"]').submit(function(e){
 		e.preventDefault();
+		buscarProducto();
+	});
+
+	jQuery('[data-interactive="contenedor"]').attr('data-mode', 'inicial');
+	jQuery('[data-interactive="product"]').change(function(){
+		jQuery('[data-interactive="product"] option:selected').each(function() {
+			jQuery('[data-interactive="contenedor"]').attr('data-mode', 'buscar');
+			buscarProducto();	     	
+	    });
+	});
+	
+	function buscarProducto(){
+
 		var producto = new Producto();
 		var idProducto;
 		jQuery('[data-interactive="product"] option:selected').each(function() {
@@ -26,13 +41,18 @@ jQuery(document).ready(function(){
 				id:idProducto, 
 				fecha:fecha
 			}, function(data){
+
 			if(data == false){
-				alert('No existen productos con ese nombre.');
+				alert('No existen precipara el producto seleccionado.');
 			}else{
 				if(data.precio){
 					jQuery('[data-interactive="maximo"]').html(data.precio.maximo);
 					jQuery('[data-interactive="minimo"]').html(data.precio.minimo);
 					jQuery('[data-interactive="promedio"]').html(data.precio.promedio);
+
+					jQuery('[data-interactive="contenedor"]').attr('data-mode', 'datos');
+				}else{
+					jQuery('[data-interactive="contenedor"]').attr('data-mode', 'sin precio');
 				}
 				if(data.comentarios){
 					for(var index in data.comentarios){
@@ -43,29 +63,10 @@ jQuery(document).ready(function(){
 						'</div>';
 						jQuery('[data-interactive="comentarios"]').append(comentarioHTML);		
 					}
-
 				}
-				jQuery('[data-interactive="contenedor"]').attr('data-mode', 'datos');
 			}
 		});
-	});
-
-	jQuery('[data-interactive="contenedor"]').attr('data-mode', 'inicial');
-	jQuery('[data-interactive="product"]').change(function(){
-		jQuery('[data-interactive="product"] option:selected').each(function() {
-			jQuery('[data-interactive="contenedor"]').attr('data-mode', 'buscar');
-			var producto = new Producto();
-			var idProducto = jQuery(this).val();
-
-			producto.obtenerDetalle({
-				id:idProducto, 
-				fecha:null
-			}, function(data){
-				//TODO: agregar precios por defecto.
-			});	     	
-	    });
-	});
-	
+	}
 
 	var producto = new Producto();
 	producto.obtenerTodos(function(data){
