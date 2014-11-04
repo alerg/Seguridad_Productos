@@ -96,10 +96,9 @@
                         if(count($comentarios)> 0){
                             $retorno->comentarios = $comentarios;
                         }
-                        
-                        return json_encode($retorno);
                     break;
                 }
+                return json_encode($retorno);
             break;
         }
     }
