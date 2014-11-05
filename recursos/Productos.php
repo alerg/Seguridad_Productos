@@ -35,6 +35,20 @@
 			return $recursos;
 		}
 
+		public function obtenerTodosPorTipo($tipo){
+			$this->entidad->IdTipoProducto = $tipo;
+			$entidades = $this->entidad->obtenerTodosPorTipo();
+			$recursos = array();
+			foreach ($entidades as $key => $value) {
+				$recurso = new Recurso_Productos();
+				$recurso->id = $value->IdProducto;
+				$recurso->tipo = $value->IdTipoProducto;
+				$recurso->descripcion = $value->Descripcion;
+				array_push($recursos, $recurso);
+			}
+			return $recursos;
+		}
+
 		public function crear(){
 			$this->entidad->idProducto = $this->id;
 			$this->entidad->descripcion = $this->descripcion;

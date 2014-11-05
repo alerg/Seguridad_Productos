@@ -20,54 +20,45 @@
     include "/header.php";
     ?>
 	
-	<script src="js/index.js"></script>
+	<script src="js/cargar.js"></script>
 
 	<section data-interactive="contenedor" class="contenedor contenido" data-mode="">
 		
 		<div class="contenedor">
-			<h2>Estadísticas de los productos</h2>
+			<h2>Cargar producto</h2>
 		</div>
-		
 		<section>
 			<fieldset class="producto">
 				<div class="columna columna--doble">
-					<label for="tipo">Tipo:</label>
+					<label for="tipo">Tipo de Producto:</label>
 					<select id="tipo" name="tipo" data-interactive="tipo">
+						<option value="" selected disabled>Seleccione un tipo</option>
+					</select>
+				</div>
+				<div class="columna columna--doble hide">
+					<label for="producto">Producto:</label>
+					<select id="producto" name="producto" data-interactive="producto">
 						<option value="" selected disabled>Seleccione un producto</option>
 					</select>
 				</div>
-				<div data-interactive="producto" class="hide">
-					<div class="columna columna--doble">
-						<label for="producto">Producto:</label>
-						<select id="producto" name="producto" data-interactive="productoSelect">
-							<option value="" selected disabled>Seleccione un producto</option>
-						</select>
-					</div>
-				</div>
-				<div data-interactive="buscar" class="hide">
-					<div class="columna columna--doble">
-						<label for="semana">Semana:</label>
-						<input type="text" id="semana" data-interactive="semana" placeholder="Seleccione un día de una semana"/>
-					</div>
-					<div class="columna columna--doble">
-						<button class="boton" data-interactive='buscarProducto'>Buscar</button>
-					</div>
-				</div>
 			</fieldset>
 		</section>
-		<section data-interactive="datos" class="datos">
+		<section data-interactive="datos" class="datosIngreso">
 			<fieldset>
 				<div class="columna columna--triple">
 					<label>Precio m&aacute;ximo</label>
-					<span id="maximo" class="estadistica" data-interactive="maximo"></span>
+					<input id="maximo" class="estadistica" data-interactive="maximo"></input>
 				</div>
 				<div class="columna columna--triple">
 					<label>Precio m&iacute;nimo</label>
-					<span id="minimo" class="estadistica" data-interactive="minimo"></span>
+					<input id="minimo" class="estadistica" data-interactive="minimo"></input>
 				</div>
 				<div class="columna columna--triple">
 					<label>Precio promedio</label>
-					<span id="promedio" class="estadistica" data-interactive="promedio"></span>
+					<input id="promedio" class="estadistica" data-interactive="promedio"></input>
+				</div>
+				<div class="columna columna--doble">
+					<button class="boton" data-interactive='agregar'>Agregar</button>
 				</div>
 			</fieldset>
 		</section>

@@ -31,12 +31,44 @@ Usuario.prototype = {
 }
 
 //Necesita CORE
-var Producto = function (){}
+var TiposProducto = function (){
+	this.id = null;
+	this.descripcion = null;
+}
 
-Producto.prototype = {
+TiposProducto.prototype = {
 	obtenerTodos: function(cb){
 		var that = this;
-		jQuery.get('/api/productos/obtenerTodos',
+		jQuery.get('/api/tiposProducto/obtenerTodos',
+			function(data){
+				that = data;
+				if(cb)
+					cb(that);
+			}
+		);
+	}
+}
+
+var Producto = function (){
+	this.tipo = null;
+	this.descripcion = null;
+}
+
+Producto.prototype = {
+	crear: function(cb){
+		jQuery.post('/api/productos/crear', {
+			tipo: this.tipo,
+			descripcion: this.descripcion
+		}, function(response){
+			if(cb)
+				cb(response);
+		}, "json"); 
+	},
+	obtenerTodos: function(cb){
+		var that = this;
+		jQuery.get('/api/productos/obtenerTodos',{
+				tipo : this.tipo
+			},
 			function(data){
 				that = data;
 				if(cb)
@@ -51,38 +83,5 @@ Producto.prototype = {
 			if(cb)
 				cb(that);
 		});	
-	}
-}
-
-//Necesita CORE
-var Mensaje = function (vuelo, nombre, email, fecha, dni, categoria){
-	this.id = null;
-}
-
-Mensaje.prototype = {
-	crear : function(cb){
-		var that = this;
-
-		jQuery.post('/api/mensajes/', {
-			producto: that.producto,
-			usuario: that.usuario,
-			mensaje: that.mensaje
-		}).done( function(data) {
-		    jQuery.extend(that, data);
-			if(cb)
-				cb(that);
-	    });
-	},
-	obtener: function(cb){
-		var that = this;
-		jQuery.get('/api/mensajes/obtener', {
-			id: that.producto
-		}).done( function(data) {
-			if(data != {}){
-				jQuery.extend(that, data);
-				if(cb)
-					cb(that);
-			}
-	    });	
 	}
 }

@@ -6,11 +6,13 @@
     include "/entidades/Precio.php";
     include "/entidades/Producto.php";
     include "/entidades/Usuario.php";
+    include "/entidades/Tipo_Producto.php";
     include "/lib/Metricas.php";
     include "/recursos/Comentarios.php";
     include "/recursos/Productos.php";
     include "/recursos/Precios.php";
     include "/recursos/Usuarios.php";
+    include "/recursos/TiposProducto.php";
     
     header('Content-Type: application/json');
 
@@ -43,22 +45,35 @@
 
     function post($entidadParam){
         switch ($entidadParam) {
+            case 'producto':
+                $recurso = new Recurso_Productos();
+                $exitoso = $recurso->crear($_POST['tipo'], $_POST['descripcion']);
+            break;
             case 'usuarios':
                 $recurso = new Recurso_Usuarios();
                 $exitoso = $recurso->crear($_POST['email'], $_POST['contrasena'], $_POST['nombre'], $_POST['apellido']);
-                if($exitoso){
-                    $retorno = array("id"=>$recurso->id);
-                }else{
-                    $retorno = array();
-                }
-                return json_encode($retorno, JSON_FORCE_OBJECT);
             break;
         }
+        if($exitoso){
+            $retorno = array("id"=>$recurso->id);
+        }else{
+            $retorno = array();
+        }
+
+        return json_encode($retorno, JSON_FORCE_OBJECT);
     }
 
     function get($entidadParam, $param){
-        $retorno = null;
+        $retorno = array();
         switch ($entidadParam) {
+            case 'tiposProducto':
+                $recurso = new Recurso_Tipos_Producto();
+                switch($param){
+                    case 'obtenerTodos':
+                        $retorno = $recurso->obtenerTodos();
+                    break;
+                }
+            break;
             case 'usuarios':
                 $recurso = new Recurso_Usuarios();
                 $autorizado = $recurso->login($_GET['email'], $_GET['contrasena']);
@@ -71,7 +86,7 @@
                 $recurso = new Recurso_Productos();
                 switch($param){
                     case 'obtenerTodos':
-                        $retorno = $recurso->obtenerTodos();
+                        $retorno = $recurso->obtenerTodosPorTipo($_GET["tipo"]);
                     break;
                     case 'obtenerDetalle':
                         $recurso->id = $_GET['id'];
@@ -98,8 +113,8 @@
                         }
                     break;
                 }
-                return json_encode($retorno);
             break;
         }
+        return json_encode($retorno, JSON_FORCE_OBJECT);
     }
  ?>

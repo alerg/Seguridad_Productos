@@ -15,24 +15,44 @@ jQuery(document).ready(function(){
 
     $('[data-interactive="semana"]').datepicker("setDate", new Date());
 
-	jQuery('[data-interactive="formBuscar"]').submit(function(e){
-		e.preventDefault();
-		buscarProducto();
-	});
-
 	jQuery('[data-interactive="contenedor"]').attr('data-mode', 'inicial');
-	jQuery('[data-interactive="product"]').change(function(){
-		jQuery('[data-interactive="product"] option:selected').each(function() {
+	
+	jQuery('[data-interactive="tipo"]').change(function(){
+		jQuery('[data-interactive="tipo"] option:selected').each(function() {
+			jQuery('[data-interactive="producto"]').removeClass('hide');
 			jQuery('[data-interactive="contenedor"]').attr('data-mode', 'buscar');
-			buscarProducto();	     	
+
+			var producto = new Producto();
+			producto.tipo = jQuery(this).val();
+			producto.obtenerTodos(function(data){
+				if(data){
+					limpiarSelect('[data-interactive="productoSelect"]');
+					for(var index in data){
+						jQuery('[data-interactive="productoSelect"]').append('<option value="'+ data[index].id +'">'+ data[index].descripcion +'</option>');
+					}
+					jQuery('[data-interactive="producto"]').change(function(){
+						jQuery('[data-interactive="buscar"]').removeClass('hide');
+
+						buscarProducto();
+
+						jQuery('[data-interactive="buscarProducto"]').click(function(e){
+							e.preventDefault();
+							buscarProducto();
+						});
+					});	     	
+				}else{
+					alert("No hay productos del tipo especificado.");
+				}
+			});			
+
 	    });
 	});
-	
+
 	function buscarProducto(){
 
 		var producto = new Producto();
 		var idProducto;
-		jQuery('[data-interactive="product"] option:selected').each(function() {
+		jQuery('[data-interactive="producto"] option:selected').each(function() {
 			idProducto = jQuery(this).val();
 		});
 		var fecha = jQuery('[data-interactive="semana"]').val();
@@ -68,35 +88,23 @@ jQuery(document).ready(function(){
 		});
 	}
 
-	var producto = new Producto();
-	producto.obtenerTodos(function(data){
-		if(data == false){
-			alert('No existen productos con ese nombre.');
-		}else{
+	var tipo = new TiposProducto();
+	tipo.obtenerTodos(function(data){
+		if(data){
+			limpiarSelect('[data-interactive="tipo"]');
 			for(var index in data){
-
-				jQuery('[data-interactive="product"]').append('<option value="'+ data[index].id +'">'+ data[index].descripcion +'</option>');
+				jQuery('[data-interactive="tipo"]').append('<option value="'+ data[index].id +'">'+ data[index].descripcion +'</option>');
 			}
-			/*
-				var productoHTML = '<div class="columna columna--simple">'+
-					'<h3 id="nombre" data-interactive="nombre">'+ data[index].descripcion +'</h3>'+
-				'</div>';
-				if(data[index].precio){
-					productoHTML += '<div class="columna columna--triple">'+
-						'<label>Precio m&aacute;ximo</label>'+
-						'<span id="maximo" class="estadistica" data-interactive="maximo">$maximo</span>'+
-					'</div>'+
-					'<div class="columna columna--triple">'+
-						'<label>Precio m&iacute;nimo</label>'+
-						'<span id="minimo" class="estadistica" data-interactive="minimo">$minimo</span>'+
-					'</div>'+
-					'<div class="columna columna--triple">'+
-						'<label>Precio promedio</label>'+
-						'<span id="promedio" class="estadistica" data-interactive="promedio">$promedio</span>'+
-					'</div>';
-				}
-				jQuery('[data-interactive="productos"]').html(productoHTML);
-			*/
+		}else{
+			alert("No hay productos del tipo especificado.");
 		}
 	});
+
+	var limpiarSelect = function(selector){
+		
+		jQuery(selector +' option').each(function() {
+			if(jQuery(this).val() != "")
+				jQuery(this).remove();
+		});
+	}
 });

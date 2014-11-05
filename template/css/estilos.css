@@ -536,20 +536,27 @@ footer.pie p{
 	padding:30px 0 0 0;
 }
 
-form.search,
 section.datos,
 section.caja-comentarios,
 .hide
 { display:none; }
 
 
-section[data-mode="buscar"] form.search{
+section[data-mode="inicial"] section fieldset div.buscar,
+section[data-mode="inicial"] section fieldset div.semana,
+section[data-mode="inicial"] section fieldset div.producto,{
+	display:none;
+}
+
+section[data-mode="buscar"] div.buscar,
+section[data-mode="buscar"] div.semana,
+section[data-mode="buscar"] div.producto,{
 	display:block;
 }
 
 section[data-mode="datos"] section.datos,
 section[data-mode="datos"] section.caja-comentarios,
-section[data-mode="datos"] form.search{
+section[data-mode="datos"] div.buscar{
 	display:block;
 }
 

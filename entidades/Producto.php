@@ -30,5 +30,11 @@
 			return $entidades;
 		}
 
+		public function obtenerTodosPorTipo(){
+			parent::setFiltrarPor(array(array('IdTipoProducto', $this->IdTipoProducto)));
+			$entidades = parent::obtenerTodos();
+			return $entidades;
+		}
+
 	}
 ?>
