@@ -2,8 +2,9 @@ jQuery(document).ready(function(){
 
 	var idProducto = sessionStorage.getItem("idProducto");
 	if(idProducto){
-		//TODO
-		//sessionStorage.removeItem("idProducto");
+		sessionStorage.removeItem("idProducto");
+	}else{
+		location.href="/index";
 	}
 
 	jQuery('[data-interactive="agregar"]').click(function(e){
@@ -18,10 +19,10 @@ jQuery(document).ready(function(){
 				idProducto: idProducto,
 				precio: monto
 			}, function(error, success){
-
 			if(error){
 				alert('No se puede cargar un nuevo precio producto seleccionado.');
 			}else{
+				alert("Precio agregado exitosamente");
 				location.href = "/index";
 			}
 		});

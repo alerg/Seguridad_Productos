@@ -7,6 +7,19 @@ var Usuario = function (){
 }
 
 Usuario.prototype = {
+	userInfo: function{
+		var that = this;
+		jQuery.get('/api/usuarios/userInfo', {})
+		.always(function(resp){
+			if(resp.isLogged){
+				this.nombre = resp.nombre;
+				this.apellido = resp.apellido;
+				cb(true);
+			}else{
+				cb(false);
+			}
+		});
+	},
 	login : function(cb){
 		var that = this;
 		jQuery.get('/api/usuarios/login', {
