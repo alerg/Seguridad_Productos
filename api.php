@@ -39,22 +39,38 @@
             echo get($entidad, $param);
 		break;
 		case "POST":  
-            echo post($entidad);
+            echo post($entidad, $param);
         break;  
      }
 
-    function post($entidadParam){
+    function post($entidadParam, $param){
         switch ($entidadParam) {
-            case 'producto':
+            case 'precios':
+                $recurso = new Recurso_Precios();
+                switch($param){
+                    case 'crear':
+                        $recurso->idProducto = $_POST['idProducto'];
+                        $recurso->monto = $_POST['precio'];
+                        //TODO usuario hardcodeade
+                        $recurso->idUsuario = 1;
+                        $exitoso = $recurso->crear();
+                    break;
+                }
+            break;
+            case 'productos':
                 $recurso = new Recurso_Productos();
-                $exitoso = $recurso->crear($_POST['tipo'], $_POST['descripcion']);
+                switch($param){
+                    case 'crear':
+                        $exitoso = $recurso->crear($_POST['tipo'], $_POST['descripcion'], $_POST['precio']);
+                    break;
+                }
             break;
             case 'usuarios':
                 $recurso = new Recurso_Usuarios();
                 $exitoso = $recurso->crear($_POST['email'], $_POST['contrasena'], $_POST['nombre'], $_POST['apellido']);
             break;
         }
-        if($exitoso){
+        if(isset($exitoso)){
             $retorno = array("id"=>$recurso->id);
         }else{
             $retorno = array();
@@ -66,6 +82,21 @@
     function get($entidadParam, $param){
         $retorno = array();
         switch ($entidadParam) {
+            case 'precios':
+                $recurso = new Recurso_Precios();
+                switch($param){
+                    case 'obtenerPorProducto':
+                        $retorno = $recurso->obtenerPorProducto();
+                    break;
+                    case 'obtenerPorProductoUsuario':                        
+                        $precio = new Recurso_Precios();
+                        $precio->idProducto = $_GET['idProducto'];
+                        //TODO usuario hardcodeade
+                        $precio->idUsuario = 1;
+                        $retorno = $precio->obtenerPorProductoUsuario();
+                    break;  
+                }
+            break;
             case 'tiposProducto':
                 $recurso = new Recurso_Tipos_Producto();
                 switch($param){
@@ -112,6 +143,21 @@
                             $retorno->comentarios = $comentarios;
                         }
                     break;
+                    case 'obtenerDetallePorUsuario':
+                        $recurso->id = $_GET['id'];
+                        $retorno = $recurso->obtener();
+
+                        $tipo = new Recurso_Tipos_Producto();
+                        $tipo->id = $retorno->tipo;
+                        $retorno->tipo = $tipo->obtenerPorId();
+                        
+                        $precio = new Recurso_Precios();
+                        $precio->idProducto = $_GET['id'];
+                        //TODO usuario hardcodeade
+                        $precio->IdUsuario = 1;
+                        $retorno->precios = $precio->obtenerPorProductoUsuario();
+
+                    break;  
                 }
             break;
         }

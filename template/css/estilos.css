@@ -538,10 +538,12 @@ footer.pie p{
 
 section.datos,
 section.caja-comentarios,
+section.cargar,
 .hide
 { display:none; }
 
 
+section[data-mode="inicial"] section.cargar,
 section[data-mode="inicial"] section fieldset div.buscar,
 section[data-mode="inicial"] section fieldset div.semana,
 section[data-mode="inicial"] section fieldset div.producto,{
@@ -554,6 +556,9 @@ section[data-mode="buscar"] div.producto,{
 	display:block;
 }
 
+section[data-mode="sin precio"] section.cargar{
+	display:block;
+}
 section[data-mode="datos"] section.datos,
 section[data-mode="datos"] section.caja-comentarios,
 section[data-mode="datos"] div.buscar{

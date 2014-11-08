@@ -54,7 +54,7 @@
 			$this->entidad->descripcion = $this->descripcion;
 			$this->entidad->idTipoProducto = $this->tipo;
 
-			$this->id = (string)$this->entidad->crear();
+			$this->id = $this->entidad->crear();
 
 			return $this;
 		}

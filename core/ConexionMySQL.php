@@ -101,6 +101,7 @@
 
 	//Metodos privados
 		public function ejecutarQuery($query){
+			//echo $query;
 			if (count($query) > 0) {
 				$this->conexion->real_query($query);
 				$matriz = array(); 

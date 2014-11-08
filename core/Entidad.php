@@ -50,7 +50,7 @@
 
 		protected function modificar(){
 			$this->init_conexion();
-			return $this->conexion->modificar($this->nombreTabla, $this->obtenerCampos(), $this->filtrarPor);	
+			return $this->conexion->modificar($this->nombreTabla, $this->obtenerCampos(), $this->filtrarPor);
 		}
 
 		private function obtenerCampos(){

@@ -11,6 +11,14 @@
 			$this->entidad = new Entidad_Tipo_Producto();
 		}
 
+		public function obtenerPorId(){
+			$this->entidad->IdTipoProducto = $this->id;
+			$entidad = $this->entidad->obtenerPorIdTipo();
+			$this->id = $entidad->IdTipoProducto;
+			$this->descripcion = $entidad->Descripcion;
+			return $this;
+		}
+
 		public function obtenerTodos(){
 			$entidades = $this->entidad->obtenerTodos();
 			$recursos = array();

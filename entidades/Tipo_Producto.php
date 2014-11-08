@@ -12,6 +12,16 @@
 			//Se marca cual es el id de la tabla
 		}
 
+		public function obtenerPorIdTipo(){
+			parent::setFiltrarPor(array(array('IdTipoProducto', $this->IdTipoProducto)));
+
+			$entidad = parent::obtener();
+			if(count($entidad) == 1)
+				return $entidad[0];
+			else
+				return null;
+		}
+
 		public function obtenerTodos(){
 			$entidades = parent::obtenerTodos();
 			return $entidades;

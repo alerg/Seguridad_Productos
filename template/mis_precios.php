@@ -20,32 +20,34 @@
     include "/header.php";
     ?>
 	
-	<script src="js/cargar.js"></script>
+	<script src="js/mis_precios.js"></script>
 
 	<section data-interactive="contenedor" class="contenedor contenido" data-mode="">
 		
 		<div class="contenedor">
-			<h2>Cargar producto</h2>
+			<h2>Mis Precios</h2>
 		</div>
 		<section>
 			<fieldset class="producto">
 				<div class="columna columna--doble">
 					<label for="tipo">Tipo:</label>
-					<input id="tipo" name="tipo" data-interactive="tipo" disabled/>
+					<select id="tipo" name="tipo" data-interactive="tipo">
+						<option value="" selected disabled>Seleccione un Tipo de producto</option>
+					</select>
 				</div>
-				<div class="columna columna--doble">
-					<label for="producto">Producto:</label>
-					<input id="producto" name="producto" data-interactive="producto" disabled/>
-				</div>
-				<div class="columna columna--doble">
-					<label for="precio">Precio:</label>
-					<input id="precio" name="precio" data-interactive="precio"/>
-				</div>
-				<div class="columna columna--doble">
-					<button class="boton" data-interactive='agregar'>Agregar</button>
+				<div data-interactive="producto" class="hide">
+					<div class="columna columna--doble">
+						<label for="producto">Producto:</label>
+						<select id="producto" name="producto" data-interactive="productoSelect">
+							<option value="" selected disabled>Seleccione un producto</option>
+						</select>
+					</div>
 				</div>
 			</fieldset>
 		</section>	
+	</section>
+	<section class="contenedor hide" data-interactive="precios">
+		<h4>Precios</h4>
 	</section>
 	<footer class="pie">
 		<p>&copy;Seguridad y Calidad de Aplicaciones Web - 2014</p>

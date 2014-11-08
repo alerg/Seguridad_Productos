@@ -7,11 +7,22 @@
 		public $FechaPrecio;
 		public $Monto;
 
+		private $filtro;
+
 		public function __construct() {
 			//Llama al constructor de Entidad
 			parent::__construct('precio');
 			//Se asigna a la variable heredada $nombreTabla el nombre de la tabla SQL
 			//Se marca cual es el id de la tabla
+		}
+
+		public function crear(){
+			return parent::crear();
+		}
+
+		public function modificar(){
+			parent::setFiltrarPor($this->filtro);
+			return parent::modificar();
 		}
 
 		public function obtenerPorSemana($fecha){
@@ -25,5 +36,14 @@
 			return parent::ejecutarQuery($query, array($this->IdProducto, $fechaInicial, $fechaFinal));
 		}
 
+		public function obtenerPorProductoUsuario(){
+			parent::setFiltrarPor(array(array('IdUsuario', $this->IdUsuario),array('IdProducto', $this->IdProducto)));
+			$entidades = parent::obtenerTodos();
+			return $entidades;
+		}
+
+		public function setfiltro($param){
+			$this->filtro = $param;
+		}
 	}
 ?>

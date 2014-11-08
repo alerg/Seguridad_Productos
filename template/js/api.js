@@ -58,7 +58,7 @@ Producto.prototype = {
 	crear: function(cb){
 		jQuery.post('/api/productos/crear', {
 			tipo: this.tipo,
-			descripcion: this.descripcion
+			descripcion: this.descripcion,
 		}, function(response){
 			if(cb)
 				cb(response);
@@ -83,5 +83,51 @@ Producto.prototype = {
 			if(cb)
 				cb(that);
 		});	
+	},
+	obtenerDetallePorUsuario: function(data, cb){
+		var that = this;
+		jQuery.get('/api/productos/obtenerDetallePorUsuario',{'id':data.id}, function(data){
+			that = data;
+			if(cb)
+				cb(that);
+		});	
+	}
+}
+
+var Precio = function (){
+	this.fecha = null;
+	this.idProducto = null;
+	this.monto = null;
+	this.idUsuario = null;
+}
+
+Precio.prototype = {
+	crear: function(data, cb){
+		jQuery.post('/api/precios/crear', data, function(response){
+			if(cb)
+				cb(null, response);
+		}, "json")
+		.fail(function() {
+		    if(cb){
+				cb({});
+			}
+		});
+	},
+	obtenerPorProducto: function(cb){
+		jQuery.post('/api/precios/obtenerPorProducto', this, function(response){
+			if(cb)
+				cb(response);
+		}, "json"); 
+	},
+	obtenerPorProductoUsuario: function(data, cb){
+		jQuery.get('/api/precios/obtenerPorProductoUsuario', data, function(response){
+			if(cb)
+				cb(null, response);
+		}, "json")
+		.fail(function() {
+		    if(cb){
+				cb({});
+			}
+		}); 
 	}
 }

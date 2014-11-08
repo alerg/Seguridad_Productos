@@ -62,9 +62,16 @@ jQuery(document).ready(function(){
 				fecha:fecha
 			}, function(data){
 
-			if(data == false){
-				alert('No existen precipara el producto seleccionado.');
-			}else{
+			if(data){
+
+				jQuery('[data-interactive="cargarPrecio"]').click(function(e){
+					e.preventDefault();
+
+					sessionStorage.setItem("idProducto", idProducto);
+					location.href = "/cargar_precio";
+				});
+
+
 				if(data.precio){
 					jQuery('[data-interactive="maximo"]').html(data.precio.maximo);
 					jQuery('[data-interactive="minimo"]').html(data.precio.minimo);
@@ -74,6 +81,7 @@ jQuery(document).ready(function(){
 				}else{
 					jQuery('[data-interactive="contenedor"]').attr('data-mode', 'sin precio');
 				}
+				jQuery('[data-interactive="comentarios"]').html('');
 				if(data.comentarios){
 					for(var index in data.comentarios){
 						var comentarioHTML = '<div class="comentario">'+
@@ -84,7 +92,10 @@ jQuery(document).ready(function(){
 						jQuery('[data-interactive="comentarios"]').append(comentarioHTML);		
 					}
 				}
+			}else{
+				alert('erro al consultar el producto seleccionado');
 			}
+
 		});
 	}
 

@@ -33,7 +33,7 @@
 				<div class="columna columna--doble">
 					<label for="tipo">Tipo:</label>
 					<select id="tipo" name="tipo" data-interactive="tipo">
-						<option value="" selected disabled>Seleccione un producto</option>
+						<option value="" selected disabled>Seleccione un Tipo de producto</option>
 					</select>
 				</div>
 				<div data-interactive="producto" class="hide">
@@ -70,6 +70,9 @@
 					<span id="promedio" class="estadistica" data-interactive="promedio"></span>
 				</div>
 			</fieldset>
+		</section>
+		<section class="cargar">
+			<a data-interactive="cargarPrecio" href="">Cargar Precio</a>
 		</section>
 		<section class="caja-comentarios contenedor" data-interactive="comentarios">
 			<h4>Comentarios</h4>
