@@ -26,29 +26,35 @@
 		
 		<div class="contenedor">
 			<h2>Mis Precios</h2>
-		</div>
-		<section>
-			<fieldset class="producto">
-				<div class="columna columna--doble">
-					<label for="tipo">Tipo:</label>
-					<select id="tipo" name="tipo" data-interactive="tipo">
-						<option value="" selected disabled>Seleccione un Tipo de producto</option>
-					</select>
-				</div>
-				<div data-interactive="producto" class="hide">
+		
+			<section>
+				<fieldset class="producto">
+					
 					<div class="columna columna--doble">
+						<label for="tipo">Tipo:</label><br />
+						<select id="tipo" name="tipo" data-interactive="tipo">
+							<option value="" selected disabled>Seleccione un Tipo de producto</option>
+						</select>
+					</div>
+					
+					<div data-interactive="producto" class="columna columna--doble hide">
 						<label for="producto">Producto:</label>
 						<select id="producto" name="producto" data-interactive="productoSelect">
 							<option value="" selected disabled>Seleccione un producto</option>
 						</select>
 					</div>
-				</div>
-			</fieldset>
-		</section>	
+					
+				</fieldset>
+			</section>
+			
+			<section class="contenedor hide" data-interactive="precios">
+				<h4>Precios</h4>
+				
+			</section>
+			
+		</div>
 	</section>
-	<section class="contenedor hide" data-interactive="precios">
-		<h4>Precios</h4>
-	</section>
+	
 	<footer class="pie">
 		<p>&copy;Seguridad y Calidad de Aplicaciones Web - 2014</p>
 	</footer>

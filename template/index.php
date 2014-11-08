@@ -30,31 +30,38 @@
 		
 		<section>
 			<fieldset class="producto">
+				
 				<div class="columna columna--doble">
-					<label for="tipo">Tipo:</label>
-					<select id="tipo" name="tipo" data-interactive="tipo">
-						<option value="" selected disabled>Seleccione un Tipo de producto</option>
-					</select>
-				</div>
-				<div data-interactive="producto" class="hide">
-					<div class="columna columna--doble">
+					
+					<div>
+						<label for="tipo">Tipo:</label><br/>
+						<select id="tipo" name="tipo" data-interactive="tipo">
+							<option value="" selected disabled>Seleccione un Tipo de producto</option>
+						</select>
+					</div>
+					<br/>
+					
+					<div data-interactive="producto" class="hide">
 						<label for="producto">Producto:</label>
 						<select id="producto" name="producto" data-interactive="productoSelect">
 							<option value="" selected disabled>Seleccione un producto</option>
 						</select>
 					</div>
 				</div>
-				<div data-interactive="buscar" class="hide">
-					<div class="columna columna--doble">
+				
+				<div data-interactive="buscar" class="columna columna--doble hide">
+					<div>
 						<label for="semana">Semana:</label>
 						<input type="text" id="semana" data-interactive="semana" placeholder="Seleccione un día de una semana"/>
 					</div>
-					<div class="columna columna--doble">
+					<div>
 						<button class="boton" data-interactive='buscarProducto'>Buscar</button>
 					</div>
 				</div>
+				
 			</fieldset>
 		</section>
+		
 		<section data-interactive="datos" class="datos">
 			<fieldset>
 				<div class="columna columna--triple">
@@ -71,14 +78,17 @@
 				</div>
 			</fieldset>
 		</section>
+		
 		<section class="cargar">
 			<a data-interactive="cargarPrecio" href="">Cargar Precio</a>
 		</section>
+		
 		<section class="caja-comentarios contenedor" data-interactive="comentarios">
-			<h4>Comentarios</h4>
+			
 		</section>
 		
 	</section>
+	
 	<footer class="pie">
 		<p>&copy;Seguridad y Calidad de Aplicaciones Web - 2014</p>
 	</footer>

@@ -9,7 +9,7 @@ jQuery(document).ready(function(){
 		changeYear: true,
 		changeMonth: true,
 		maxDate:0,
-		minDate: new Date(2014, 9, 01),
+		minDate: new Date(2014, 10, 01),
 		weekHeader:'Semana'
 	});
 
@@ -83,6 +83,9 @@ jQuery(document).ready(function(){
 				}
 				jQuery('[data-interactive="comentarios"]').html('');
 				if(data.comentarios){
+				
+					jQuery('[data-interactive="comentarios"]').html('<h4>Comentarios</h4>');
+					
 					for(var index in data.comentarios){
 						var comentarioHTML = '<div class="comentario">'+
 							'<header>'+ data.comentarios[index].id +'</header>'+
@@ -91,9 +94,12 @@ jQuery(document).ready(function(){
 						'</div>';
 						jQuery('[data-interactive="comentarios"]').append(comentarioHTML);		
 					}
+					
+					jQuery('[data-interactive="comentarios"]').append('<textarea class="agregar-comentario" name="comentario" placeholder="Escribí un comentario"></textarea><button class="boton">Enviar</boton>');	
+					
 				}
 			}else{
-				alert('erro al consultar el producto seleccionado');
+				alert('Error al consultar el producto seleccionado.');
 			}
 
 		});

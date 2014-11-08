@@ -20,7 +20,7 @@ jQuery(document).ready(function(){
 			}, function(error, success){
 
 			if(error){
-				alert('No existen precipara el producto seleccionado.');
+				alert('No se puede cargar un nuevo precio producto seleccionado.');
 			}else{
 				location.href = "/index";
 			}

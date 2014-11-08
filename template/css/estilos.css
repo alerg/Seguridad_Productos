@@ -365,6 +365,20 @@ fieldset.asientos input:checked + label.ocupado{
 	background-color:#E1E1E1;
 }
 
+/*Precio*/
+.precio{ padding:20px; border-bottom:1px solid #E1E1E1;}
+.precio__valor{ font-size:30px; font-weight:normal; padding-right:20px; }
+.precio__fecha{ color:grey; font-style:italic; }
+
+/*Caja comentario*/
+.agregar-comentario{
+	width:98%;
+	padding:1%;
+	font-size:14px;
+	font-family:inherit;
+	margin:10px 0;
+}
+
 /*Progreso*/
 
 .progreso{

@@ -18,22 +18,27 @@ jQuery(document).ready(function(){
 
 	var buscarPrecios = function(idProducto){
 		var precios = new Precio();
+		
 		precios.obtenerPorProductoUsuario(
 			{
 				idProducto:idProducto
 			}, function(error, data){
 				if(data){
+					
 					jQuery('[data-interactive="precios"]').removeClass('hide');
+					
 					for(var index in data){
-						var precioHTML = '<div class="comentario">'+
-							'<header>$'+ data[index].monto +'</header>';
+						var precioHTML = '<div class="precio">'+
+							'<span class="precio__valor">$'+ data[index].monto +'</span>';
 
+						var precioHTML = precioHTML + '<span class="precio__fecha">'+ data[index].fecha +'hs</span>';
+						
 						if(data[index].modificable){
-							var precioHTML = precioHTML + '<button data-interactive="modificar" producto="'+ data[index].idProducto +'">Modificar</button>';
+							var precioHTML = precioHTML + '<button data-interactive="modificar" producto="'+ data[index].idProducto +'" class="boton">Modificar</button>';
 						}
-
-						var precioHTML = precioHTML + '<footer>'+ data[index].fecha +'hs.</footer>'+
-						'</div>';
+						
+						var precioHTML = precioHTML + '</div>';
+						
 						jQuery('[data-interactive="precios"]').append(precioHTML);
 
 						jQuery('[data-interactive="modificar"]').click(function(){
@@ -41,6 +46,7 @@ jQuery(document).ready(function(){
 							location.href = "/cargar_precio";
 						});		
 					}
+					
 				}
 		});
 	}
