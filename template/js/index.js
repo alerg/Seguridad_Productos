@@ -74,9 +74,9 @@ jQuery(document).ready(function(){
 
 
 				if(data.precio){
-					jQuery('[data-interactive="maximo"]').html(data.precio.maximo);
-					jQuery('[data-interactive="minimo"]').html(data.precio.minimo);
-					jQuery('[data-interactive="promedio"]').html(data.precio.promedio);
+					jQuery('[data-interactive="maximo"]').html(Math.round(parseFloat(data.precio.maximo) * 100) / 100);
+					jQuery('[data-interactive="minimo"]').html(Math.round(parseFloat(data.precio.minimo) * 100) / 100);
+					jQuery('[data-interactive="promedio"]').html(Math.round(parseFloat(data.precio.promedio) * 100) / 100);
 
 					jQuery('[data-interactive="contenedor"]').attr('data-mode', 'datos');
 				}else{
