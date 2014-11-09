@@ -6,4 +6,16 @@ jQuery(document).ready(function(){
 			location.href = "/template/index.php";
 		});
 	});
+
+	var usuario = new Usuario();
+	usuario.userInfo(function(error, estaLoggeado){
+		if(estaLoggeado){
+			jQuery('[data-interactive="login"]').remove();
+			jQuery('[data-interactive="registro"]').remove();
+		}else{
+			jQuery('[data-interactive="precios"]').remove();
+			jQuery('[data-interactive="logout"]').remove();
+		}
+	});
+
 });

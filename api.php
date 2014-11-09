@@ -152,6 +152,8 @@
                         if(isset($_SESSION['usr'])){
                             $recurso->id = $_SESSION['usr'];
                             $retorno = $recurso->obtener();
+                        }else{
+                            http_response_code(401);
                         }
                     break;
                 }

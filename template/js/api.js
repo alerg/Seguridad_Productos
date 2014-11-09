@@ -46,16 +46,17 @@ Usuario.prototype = {
 			}
 		});
 	},
-	userInfo: function(){
+	userInfo: function(cb){
 		var that = this;
 		jQuery.get('/api/usuarios/userInfo', {})
-		.always(function(resp){
-			if(resp.isLogged){
+		.always(function(resp, statusName, jqXHR){
+			if(jqXHR.status == 200 && resp.nombre){
 				this.nombre = resp.nombre;
 				this.apellido = resp.apellido;
-				cb(true);
+				cb(null, true);
 			}else{
-				cb(false);
+				if(cb)
+					cb(null, false);
 			}
 		});
 	}

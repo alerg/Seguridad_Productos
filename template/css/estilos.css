@@ -554,7 +554,7 @@ section.datos,
 section.caja-comentarios,
 section.cargar,
 .hide
-{ display:none; }
+{ display:none; !importat}
 
 
 section[data-mode="inicial"] section.cargar,
