@@ -14,7 +14,7 @@ jQuery(document).ready(function(){
 
 		usuario.crear(function(data){
 			if(data){
-				location.href = "/index";
+				location.href = "/template/index.php";
 			}else{
 				alert("Ah ocurrido un error. Verifique los datos y vuelva a intertarlo.");
 			}

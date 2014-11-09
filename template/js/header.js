@@ -3,7 +3,7 @@ jQuery(document).ready(function(){
 		var usuario = new Usuario();
 
 		usuario.logout(function(){
-			location.href = "/index";
+			location.href = "/template/index.php";
 		});
 	});
 });

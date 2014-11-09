@@ -12,7 +12,7 @@ jQuery(document).ready(function(){
 			if(error){
 				alert("Verifique los datos ingresados");
 			}else{
-				location.href = "/index";
+				location.href = "/template/index.php";
 			}
 		}); 
 	});

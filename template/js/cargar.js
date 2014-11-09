@@ -4,7 +4,7 @@ jQuery(document).ready(function(){
 	if(idProducto){
 		sessionStorage.removeItem("idProducto");
 	}else{
-		location.href="/index";
+		location.href="/template/index.php";
 	}
 
 	jQuery('[data-interactive="agregar"]').click(function(e){
@@ -23,7 +23,7 @@ jQuery(document).ready(function(){
 				alert('No se puede cargar un nuevo precio producto seleccionado.');
 			}else{
 				alert("Precio agregado exitosamente");
-				location.href = "/index";
+				location.href = "/template/index.php";
 			}
 		});
 	});
