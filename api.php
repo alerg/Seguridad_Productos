@@ -27,7 +27,7 @@
     $urlSegurizadas = array(
         "precios"=> array("crear", "obtenerPorProductoUsuario"),
         "productos"=>array("crear", "obtenerDetallePorUsuario"),
-        "usuarios"=>array("userInfo"),
+        "usuarios"=>array("logout", "userInfo"),
     );
 
     $indices = array_keys($urlSegurizadas);
@@ -68,7 +68,6 @@
             break;  
         }
     }
-
     
     function post($entidadParam, $param){
         $retorno = array();
@@ -110,6 +109,9 @@
                             http_response_code(204);
                             $_SESSION['usr'] = $idUsuario;
                         }
+                    break;
+                    case 'logout':
+                        session_destroy();
                     break;
                 }
             break;

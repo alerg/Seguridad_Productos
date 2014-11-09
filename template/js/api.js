@@ -7,18 +7,16 @@ var Usuario = function (){
 }
 
 Usuario.prototype = {
-	userInfo: function(){
-		var that = this;
-		jQuery.get('/api/usuarios/userInfo', {})
-		.always(function(resp){
-			if(resp.isLogged){
-				this.nombre = resp.nombre;
-				this.apellido = resp.apellido;
-				cb(true);
-			}else{
-				cb(false);
-			}
-		});
+	crear: function(cb){
+		jQuery.post('/api/usuarios/crear', {
+			email: this.email,
+			contrasena: this.contrasena,
+			nombre: this.nombre,
+			apellido: this.apellido
+		}, function(response){
+			if(cb)
+				cb(response);
+		}, "json"); 
 	},
 	login : function(cb){
 		var that = this;
@@ -37,16 +35,29 @@ Usuario.prototype = {
 			}
 		});
 	},
-	crear: function(cb){
-		jQuery.post('/api/usuarios/crear', {
-			email: this.email,
-			contrasena: this.contrasena,
-			nombre: this.nombre,
-			apellido: this.apellido
-		}, function(response){
-			if(cb)
-				cb(response);
-		}, "json"); 
+	logout: function(cb){
+		jQuery.post('/api/usuarios/logout', {})
+		.always(function(data, statusName, jqXHR){
+			if(jqXHR.status == 204){
+				cb();			
+			}else{
+				if(cb)
+					cb({});
+			}
+		});
+	},
+	userInfo: function(){
+		var that = this;
+		jQuery.get('/api/usuarios/userInfo', {})
+		.always(function(resp){
+			if(resp.isLogged){
+				this.nombre = resp.nombre;
+				this.apellido = resp.apellido;
+				cb(true);
+			}else{
+				cb(false);
+			}
+		});
 	}
 }
 

@@ -2,8 +2,7 @@ jQuery(document).ready(function(){
 
 	var idProducto = sessionStorage.getItem("idProducto");
 	if(idProducto){
-		//TODO
-		//sessionStorage.removeItem("idProducto");
+		sessionStorage.removeItem("idProducto");
 	}
 
 	jQuery('[data-interactive="tipo"]').change(function(){
@@ -23,33 +22,35 @@ jQuery(document).ready(function(){
 			{
 				idProducto:idProducto
 			}, function(error, data){
-				if(data[0]){
-					
-					jQuery('[data-interactive="precios"]').removeClass('hide');
-					
-					for(var index in data){
-						var precioHTML = '<div class="precio">'+
-							'<span class="precio__valor">$'+ data[index].monto +'</span>';
+				
+				var existenPrecios = false;
+				for(var index in data){
+					existenPrecios = true;
+					var precioHTML = '<div class="precio">'+
+						'<span class="precio__valor">$'+ data[index].monto +'</span>';
 
-						var precioHTML = precioHTML + '<span class="precio__fecha">'+ data[index].fecha +'hs</span>';
-						
-						if(data[index].modificable){
-							var precioHTML = precioHTML + '<button data-interactive="modificar" producto="'+ data[index].idProducto +'" class="boton">Modificar</button>';
-						}
-						
-						var precioHTML = precioHTML + '</div>';
-						
-						jQuery('[data-interactive="precios"]').append(precioHTML);
-
-						jQuery('[data-interactive="modificar"]').click(function(){
-							sessionStorage.setItem("idProducto", jQuery(this).attr("producto"));
-							location.href = "/cargar_precio";
-						});		
+					var precioHTML = precioHTML + '<span class="precio__fecha">'+ data[index].fecha +'hs</span>';
+					
+					if(data[index].modificable){
+						var precioHTML = precioHTML + '<button data-interactive="modificar" producto="'+ data[index].idProducto +'" class="boton">Modificar</button>';
 					}
-				}else{
+					
+					var precioHTML = precioHTML + '</div>';
+					
+					jQuery('[data-interactive="precios"]').append(precioHTML);
+
+					jQuery('[data-interactive="modificar"]').click(function(){
+						sessionStorage.setItem("idProducto", jQuery(this).attr("producto"));
+						location.href = "/cargar_precio";
+					});		
+				}
+
+				if(!existenPrecios){
 					jQuery('[data-interactive="precios"]').addClass('hide');
 					jQuery('[data-interactive="precios"]').html('');
 					alert("No se encontraron precios para el producto seleccionado.");
+				}else{
+					jQuery('[data-interactive="precios"]').removeClass('hide');
 				}
 		});
 	}

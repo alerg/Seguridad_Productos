@@ -1,3 +1,4 @@
+<script src="js/header.js"></script>
 <header class="cabecera">
 	<div class="contenedor">
 		<h1><a href="index"><span>Productos</span></a></h1>
@@ -9,6 +10,7 @@
 				<li class="login"><a href="/login">Login</a></li>
 				<li class="login"><a href="/registro">Registro</a></li>
 				<li class="login"><a href="/mis_precios">Mis Precios</a></li>
+				<li class="login"><a href="" data-interactive="logout">Salir</a></li>
 			</ul>
 		</div>
 	</nav>
