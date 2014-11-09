@@ -13,7 +13,7 @@ jQuery(document).ready(function(){
 			jQuery('[data-interactive="login"]').remove();
 			jQuery('[data-interactive="registro"]').remove();
 		}else{
-			jQuery('[data-interactive="precios"]').remove();
+			jQuery('[data-interactive="misprecios"]').remove();
 			jQuery('[data-interactive="logout"]').remove();
 		}
 	});

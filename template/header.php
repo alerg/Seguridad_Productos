@@ -9,7 +9,7 @@
 				<li><a href="/template/index.php">Home</a></li>
 				<li class="login" data-interactive="login"><a href="/template/login.php">Login</a></li>
 				<li class="login" data-interactive="registro"><a href="/template/registro.php">Registro</a></li>
-				<li class="login" data-interactive="precios"><a href="/template/mis_precios.php">Mis Precios</a></li>
+				<li class="login" data-interactive="misprecios"><a href="/template/mis_precios.php">Mis Precios</a></li>
 				<li class="login" data-interactive="logout"><a href="" data-interactive="logout">Salir</a></li>
 			</ul>
 		</div>
