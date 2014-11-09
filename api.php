@@ -14,36 +14,64 @@
     include "/recursos/Usuarios.php";
     include "/recursos/TiposProducto.php";
     
+    session_start();
+
     header('Content-Type: application/json');
 
-    $httpMetodo = $_SERVER['REQUEST_METHOD'];  
     $url = $_SERVER['REQUEST_URI'];
     $split = explode('/', explode('?', $url)[0]);
     $entidad = null;
     $param = null;
     $metodo = null;
 
-    foreach ($split as $key => $value) {
-        switch($key){
-            case '2':
-                $entidad = $value;
-                break;
-            case '3':
-                $param =  $value;
-                break;
+    $urlSegurizadas = array(
+        "precios"=> array("crear", "obtenerPorProductoUsuario"),
+        "productos"=>array("crear", "obtenerDetallePorUsuario"),
+        "usuarios"=>array("userInfo"),
+    );
+
+    $indices = array_keys($urlSegurizadas);
+
+    if(in_array($entidad, $indices)){
+        $entidadSegurizada = $urlSegurizadas[$entidad];
+        if(in_array($param, $entidadSegurizada)){
+            if(! isset($_SESSION['usr'])){
+                http_response_code(401);
+                echo json_encode(array(), JSON_FORCE_OBJECT);
+            }else{
+                usarMetodo($split);
+            }
+        }
+    }else{
+        usarMetodo($split);
+    }
+
+
+    function usarMetodo($valores){
+        foreach ($valores as $key => $value) {
+            switch($key){
+                case '2':
+                    $entidad = $value;
+                    break;
+                case '3':
+                    $param =  $value;
+                    break;
+            }
+        }
+
+        switch ($_SERVER['REQUEST_METHOD']) {  
+            case "GET":
+                echo get($entidad, $param);
+            break;
+            case "POST":  
+                echo post($entidad, $param);
+            break;  
         }
     }
 
-    switch ($httpMetodo) {  
-        case "GET":
-            echo get($entidad, $param);
-		break;
-		case "POST":  
-            echo post($entidad, $param);
-        break;  
-     }
-
+    
     function post($entidadParam, $param){
+        $retorno = array();
         switch ($entidadParam) {
             case 'precios':
                 $recurso = new Recurso_Precios();
@@ -51,8 +79,7 @@
                     case 'crear':
                         $recurso->idProducto = $_POST['idProducto'];
                         $recurso->monto = $_POST['precio'];
-                        //TODO usuario hardcodeade
-                        $recurso->idUsuario = 1;
+                        $recurso->idUsuario = $_SESSION['usr'];
                         $exitoso = $recurso->crear();
                     break;
                 }
@@ -67,13 +94,25 @@
             break;
             case 'usuarios':
                 $recurso = new Recurso_Usuarios();
-                $exitoso = $recurso->crear($_POST['email'], $_POST['contrasena'], $_POST['nombre'], $_POST['apellido']);
+                switch($param){
+                    case 'crear':
+                        $exitoso = $recurso->crear($_POST['email'], $_POST['contrasena'], $_POST['nombre'], $_POST['apellido']);
+                        if(isset($exitoso)){
+                            $retorno = array("id"=>$recurso->id);
+                        }
+                    break;
+                    case 'login':
+                        $basic = preg_split('/&/', base64_decode($_POST['basic']));
+                        $idUsuario = $recurso->login($basic[0], $basic[1]);
+                        if($idUsuario == null){
+                            http_response_code(401);
+                        }else{
+                            http_response_code(204);
+                            $_SESSION['usr'] = $idUsuario;
+                        }
+                    break;
+                }
             break;
-        }
-        if(isset($exitoso)){
-            $retorno = array("id"=>$recurso->id);
-        }else{
-            $retorno = array();
         }
 
         return json_encode($retorno, JSON_FORCE_OBJECT);
@@ -91,8 +130,7 @@
                     case 'obtenerPorProductoUsuario':                        
                         $precio = new Recurso_Precios();
                         $precio->idProducto = $_GET['idProducto'];
-                        //TODO usuario hardcodeade
-                        $precio->idUsuario = 1;
+                        $precio->idUsuario = $_SESSION['usr'];
                         $retorno = $precio->obtenerPorProductoUsuario();
                     break;  
                 }
@@ -107,11 +145,14 @@
             break;
             case 'usuarios':
                 $recurso = new Recurso_Usuarios();
-                $autorizado = $recurso->login($_GET['email'], $_GET['contrasena']);
-                if(! $autorizado){
-                    http_response_code(401);    
+                switch($param){
+                    case 'userInfo':
+                        if(isset($_SESSION['usr'])){
+                            $recurso->id = $_SESSION['usr'];
+                            $retorno = $recurso->obtener();
+                        }
+                    break;
                 }
-                return json_encode(array(), JSON_FORCE_OBJECT);
             break;
             case 'productos':
                 $recurso = new Recurso_Productos();
@@ -153,8 +194,7 @@
                         
                         $precio = new Recurso_Precios();
                         $precio->idProducto = $_GET['id'];
-                        //TODO usuario hardcodeade
-                        $precio->IdUsuario = 1;
+                        $precio->IdUsuario = $_SESSION['usr'];
                         $retorno->precios = $precio->obtenerPorProductoUsuario();
 
                     break;  

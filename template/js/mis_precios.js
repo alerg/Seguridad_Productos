@@ -23,7 +23,7 @@ jQuery(document).ready(function(){
 			{
 				idProducto:idProducto
 			}, function(error, data){
-				if(data){
+				if(data[0]){
 					
 					jQuery('[data-interactive="precios"]').removeClass('hide');
 					
@@ -46,7 +46,10 @@ jQuery(document).ready(function(){
 							location.href = "/cargar_precio";
 						});		
 					}
-					
+				}else{
+					jQuery('[data-interactive="precios"]').addClass('hide');
+					jQuery('[data-interactive="precios"]').html('');
+					alert("No se encontraron precios para el producto seleccionado.");
 				}
 		});
 	}

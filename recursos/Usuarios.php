@@ -2,7 +2,6 @@
 	class Recurso_Usuarios{
 		public $id;
 		public $email;
-		public $contrasena;
 		public $nombre;
 		public $apellido;
 
@@ -11,7 +10,6 @@
 		public function __construct() {
 			$this->id = null;
 			$this->email = null;
-			$this->contrasena = null;
 			$this->nombre = null;
 			$this->apellido = null;
 
@@ -27,7 +25,7 @@
 			
 			$retorno = $this->entidad->crear();
 			if($retorno){
-				$this->id = $this->entidad->getId();
+				$this->id = $this->entidad->IdUsuario;
 				return true;
 			}else{
 				return false;
@@ -35,19 +33,22 @@
 		}
 
 		public function login($email, $contrasena){
-			$this->email = $email;
-			$this->contrasena = $contrasena;
-
-			$entidad = $this->entidad->obtenerPorEmail($this->email);
-			if($entidad != null && $entidad->Contrasena == $this->contrasena){
+			$entidad = $this->entidad->obtenerPorEmail($email);
+			if($entidad != null && $entidad->Password == $contrasena){
 				//TODO: Generar TOKEN
-				return TRUE;
+				return $entidad->IdUsuario;
 			}
-			return FALSE;
+			return null;
 		}
 
 		public function obtener(){
-
+			$this->entidad->IdUsuario = $this->id;
+			$entidad = $this->entidad->obtener();
+			$this->id = $entidad->IdUsuario;
+			$this->nombre = $entidad->Nombre;
+			$this->apellido = $entidad->Apelllido;
+			$this->email = $entidad->Email;
+			return $this;
 		}
 	}
 ?>

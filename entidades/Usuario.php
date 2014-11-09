@@ -2,7 +2,7 @@
 	//Representa la tabla recorridos de SQL.
 	class Entidad_Usuario extends Entidad{
 
-		private $IdUsuario;
+		public $IdUsuario;
 		public $Nombre;
 		public $Apelllido;
 		public $Email;
@@ -13,6 +13,18 @@
 			parent::__construct('usuario');
 			//Se asigna a la variable heredada $nombreTabla el nombre de la tabla SQL
 			//Se marca cual es el id de la tabla
+		}
+
+		public function obtener(){
+			if($this->IdUsuario != null){
+				parent::setFiltrarPor(array(array('IdUsuario', $this->IdUsuario)));
+			}
+
+			$entidad = parent::obtener();
+			if(count($entidad) == 1)
+				return $entidad[0];
+			else
+				return null;
 		}
 
 		public function crear(){
@@ -34,10 +46,6 @@
 				return $entidad[0];
 			else
 				return null;
-		}
-
-		public function getId(){
-			return $this->IdUsuario;
 		}
 	}
 ?>

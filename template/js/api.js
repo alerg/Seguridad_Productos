@@ -7,7 +7,7 @@ var Usuario = function (){
 }
 
 Usuario.prototype = {
-	userInfo: function{
+	userInfo: function(){
 		var that = this;
 		jQuery.get('/api/usuarios/userInfo', {})
 		.always(function(resp){
@@ -22,12 +22,19 @@ Usuario.prototype = {
 	},
 	login : function(cb){
 		var that = this;
-		jQuery.get('/api/usuarios/login', {
-			email: this.email,
-			contrasena: this.contrasena
-		}).always(function(resp){
-			if(cb)
-				cb(resp);
+
+		var basic = btoa(this.email + '&' + this.contrasena); 
+
+		jQuery.post('/api/usuarios/login', {
+			basic: basic 
+		}, "json")
+		.always(function(data, statusName, jqXHR){
+			if(jqXHR.status == 204){
+				cb();			
+			}else{
+				if(cb)
+					cb({});
+			}
 		});
 	},
 	crear: function(cb){
