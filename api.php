@@ -3,12 +3,16 @@
     include "/core/Entidad.php";
     include "/core/Recurso.php";
     include "/entidades/Comentario.php";
+    include "/entidades/Comentario_Anonimo.php";
+    include "/entidades/Comentario_Registrado.php";
     include "/entidades/Precio.php";
     include "/entidades/Producto.php";
     include "/entidades/Usuario.php";
     include "/entidades/Tipo_Producto.php";
     include "/lib/Metricas.php";
     include "/recursos/Comentarios.php";
+    include "/recursos/ComentariosAnonimo.php";
+    include "/recursos/ComentariosUsuariosRegistrados.php";
     include "/recursos/Productos.php";
     include "/recursos/Precios.php";
     include "/recursos/Usuarios.php";
@@ -72,6 +76,18 @@
     function post($entidadParam, $param){
         $retorno = array();
         switch ($entidadParam) {
+            case 'comentarios':
+                $recurso = new Recurso_Comentarios();
+                switch($param){
+                    case 'crear':
+                        $idUsuario = null;
+                        if(isset($_SESSION['usr'])){
+                            $idUsuario = $_SESSION['usr'];
+                        }
+                        $recurso->crear($_POST['idProducto'], $_POST['comentario'], $idUsuario, $_POST['nickname']);
+                    break;
+                }
+            break;
             case 'precios':
                 $recurso = new Recurso_Precios();
                 switch($param){
@@ -176,6 +192,10 @@
                             $fecha = new DateTime("now");
                         }else{
                             $fecha = DateTime::createFromFormat('d/m/Y', $fecha);    
+                            $hoy = new DateTime("now");
+                            if($fecha->format('d/m/Y') == $hoy->format('d/m/Y')){
+                                $fecha = $hoy;
+                            }
                         }
                         $precios = $precio->obtenerPorSemana($fecha);
                         if(count($precios)> 0){
@@ -184,9 +204,26 @@
                         $comentario = new Recurso_Comentarios();
                         $comentario->idProducto = $_GET['id'];
                         $comentarios = $comentario->obtenerPorId();
-                        if(count($comentarios)> 0){
-                            $retorno->comentarios = $comentarios;
+                        
+                        foreach ($comentarios as $key => $value) {
+                            $anonimo = new Recurso_Comentarios_Anonimos();
+                            $anonimo->id = $value->id;
+                            $recurso = $anonimo->obtener();
+                            if($recurso != null){
+                                $comentarios[$key]->anonimo = $recurso->nickName;
+                            }else{
+                                $registrado = new Recurso_Comentarios_Usuarios_Registrados();
+                                $registrado->id = $value->id;
+                                $recurso = $registrado->obtener();
+                                if($recurso != null){
+                                    $usuario = new Recurso_Usuarios();
+                                    $usuario->id = $recurso->idUsuario;
+                                    $usuario->obtener();
+                                    $comentarios[$key]->registrado = $usuario->nombre ." ". $usuario->apellido;
+                                }
+                            }
                         }
+                        $retorno->comentarios = $comentarios;
                     break;
                     case 'obtenerDetallePorUsuario':
                         $recurso->id = $_GET['id'];

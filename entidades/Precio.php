@@ -30,10 +30,12 @@
 			$año = $fecha->format('Y');
 			$fechaInicial = date(datetime::ISO8601, strtotime($año."W".$semana));
 			$fechaFinal = date(datetime::ISO8601, strtotime($año."W".$semana."7"));
-			
+			$fechaFinal = new dateTime($fechaFinal);
+			date_add($fechaFinal, date_interval_create_from_date_string('1 day'));
+
 			$query = "SELECT * FROM precio ".
 					"WHERE IdProducto = $0 AND FechaPrecio >= '$1' AND FechaPrecio <= '$2'";
-			return parent::ejecutarQuery($query, array($this->IdProducto, $fechaInicial, $fechaFinal));
+			return parent::ejecutarQuery($query, array($this->IdProducto, $fechaInicial, $fechaFinal->format(datetime::ISO8601)));
 		}
 
 		public function obtenerPorProductoUsuario(){

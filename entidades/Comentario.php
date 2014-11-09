@@ -14,6 +14,10 @@
 			//Se marca cual es el id de la tabla
 		}
 
+		public function crear(){
+			return parent::crear();
+		}
+
 		public function obtenerPorId(){
 			
 			if($this->IdProducto != null){

@@ -15,8 +15,6 @@
 			$this->entidad = new Entidad_Precio();
 		}
 
-
-
 		public function obtenerPorProductoUsuario(){
 			$this->entidad->IdProducto = $this->idProducto;
 			$this->entidad->IdUsuario = $this->idUsuario;

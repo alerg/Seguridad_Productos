@@ -92,7 +92,7 @@ jQuery(document).ready(function(){
 				var producto = new Producto();
 				producto.obtenerDetallePorUsuario({id:idProducto}, function(data){
 					if(data == false){
-						alert('No existen productos con ese nombre.');
+						alert('Ocurrió un error al buscar el pruducto seleccionado');
 					}else{
 						jQuery('[data-interactive="tipo"] option[value="'+ data.tipo.id +'"]').prop('selected', true);
 

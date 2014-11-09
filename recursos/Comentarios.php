@@ -15,6 +15,27 @@
 			$this->entidad = new Entidad_Comentario();
 		}
 
+		public function crear($idProducto, $comentario, $idUsuario, $nickname){
+			$this->entidad->IdProducto = $idProducto;
+			$fecha = new DateTime("now");
+			$this->entidad->FechaComentario = $fecha->format('Y-m-d H:i:s');
+			$this->entidad->CuerpoComentario = $comentario;
+
+			$idComentario = $this->entidad->crear();
+
+			if(isset($idUsuario)){
+				$registrado = new Entidad_Comentario_Usuario_Registrado();
+				$registrado->IdComentario = $idComentario;
+				$registrado->IdUsuario = $idUsuario;
+				$registrado->crear();
+			}else{
+				$anonimo = new Entidad_Comentario_Anonimo();
+				$anonimo->IdComentario = $idComentario;
+				$anonimo->NickName = $nickname;
+				$anonimo->crear();
+			}
+		}
+
 		public function obtenerPorId(){
 			$this->entidad->IdProducto = $this->idProducto;
 			$entidades = $this->entidad->obtenerPorId();

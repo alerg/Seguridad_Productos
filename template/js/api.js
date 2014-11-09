@@ -163,3 +163,35 @@ Precio.prototype = {
 		}); 
 	}
 }
+
+var Comentarios = function (){
+	this.fecha = null;
+	this.idProducto = null;
+	this.idUsuario = null;
+	this.nickname = null;
+	this.comentario = null;
+}
+
+Comentarios.prototype = {
+	crear: function(cb){
+		jQuery.post('/api/comentarios/crear', {
+			idProducto: this.idProducto,
+			comentario: this.comentario,
+			nickname: this.nickname
+		}, function(response){
+			if(cb)
+				cb(null, response);
+		}, "json")
+		.fail(function() {
+		    if(cb){
+				cb({});
+			}
+		});
+	},
+	obtenerPorProducto: function(cb){
+		jQuery.post('/api/precios/comentarios', this, function(response){
+			if(cb)
+				cb(response);
+		}, "json"); 
+	}
+}
