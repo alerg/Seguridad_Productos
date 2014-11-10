@@ -25,27 +25,10 @@ jQuery(document).ready(function(){
 			//var producto = new Producto();
 			//producto.tipo = jQuery(this).val();
 			buscarProductos(jQuery(this).val());
-			/*producto.obtenerTodos(function(data){
-				if(data){
-					limpiarSelect('[data-interactive="productoSelect"]');
-					for(var index in data){
-						jQuery('[data-interactive="productoSelect"]').append('<option value="'+ data[index].id +'">'+ data[index].descripcion +'</option>');
-					}
-					jQuery('[data-interactive="producto"]').change(function(){
-						jQuery('[data-interactive="buscar"]').removeClass('hide');
-
-						buscarDetalle();
-
-						jQuery('[data-interactive="buscarProducto"]').click(function(e){
-							e.preventDefault();
-							buscarDetalle();
-						});
-					});	     	
-				}else{
-					alert("No hay productos del tipo especificado.");
-				}
-			});*/			
-
+			jQuery('[data-interactive="buscarProducto"]').click(function(e){
+				e.preventDefault();
+				buscarDetalle();
+			});
 	    });
 	});
 
