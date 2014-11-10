@@ -22,8 +22,6 @@ jQuery(document).ready(function(){
 			jQuery('[data-interactive="producto"]').removeClass('hide');
 			jQuery('[data-interactive="contenedor"]').attr('data-mode', 'buscar');
 
-			//var producto = new Producto();
-			//producto.tipo = jQuery(this).val();
 			buscarProductos(jQuery(this).val());
 			jQuery('[data-interactive="buscarProducto"]').click(function(e){
 				e.preventDefault();
@@ -91,6 +89,9 @@ jQuery(document).ready(function(){
 				usuario.userInfo(function(error, estaLoggeado){
 					if(estaLoggeado){
 						jQuery('[data-interactive="nick"]').addClass('hide');
+						jQuery('[data-interactive="cargarSection"]').removeClass('hide');
+					}else{
+						jQuery('[data-interactive="cargarSection"]').addClass('hide');
 					}
 				});
 

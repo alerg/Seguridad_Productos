@@ -552,7 +552,6 @@ footer.pie p{
 
 section.datos,
 section.caja-comentarios,
-section.cargar,
 .hide
 { display:none; !importat}
 
@@ -570,9 +569,6 @@ section[data-mode="buscar"] div.producto,{
 	display:block;
 }
 
-section[data-mode="sin precio"] section.cargar{
-	display:block;
-}
 section[data-mode="datos"] section.datos,
 section[data-mode="datos"] section.caja-comentarios,
 section[data-mode="datos"] div.buscar{

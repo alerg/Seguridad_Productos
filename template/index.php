@@ -79,7 +79,7 @@
 			</fieldset>
 		</section>
 		
-		<section class="cargar">
+		<section class="cargar hide" data-interactive="cargarSection">
 			<a data-interactive="cargarPrecio" href="">Cargar Precio</a>
 		</section>
 		
