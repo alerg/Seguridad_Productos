@@ -203,7 +203,8 @@
                         }
                         $comentario = new Recurso_Comentarios();
                         $comentario->idProducto = $_GET['id'];
-                        $comentarios = $comentario->obtenerPorId();
+                        $comentario->fecha = $_GET['fecha'];
+                        $comentarios = $comentario->obtenerPorSemana();
                         
                         foreach ($comentarios as $key => $value) {
                             $anonimo = new Recurso_Comentarios_Anonimos();

@@ -36,9 +36,10 @@
 			}
 		}
 
-		public function obtenerPorId(){
+		public function obtenerPorSemana(){
 			$this->entidad->IdProducto = $this->idProducto;
-			$entidades = $this->entidad->obtenerPorId();
+			$this->fecha = DateTime::createFromFormat('d/m/Y', $this->fecha);
+			$entidades = $this->entidad->obtenerPorSemana($this->fecha);
 			$recursos = array();
 			foreach ($entidades as $key => $value) {
 				$recurso = new Recurso_Comentarios();
