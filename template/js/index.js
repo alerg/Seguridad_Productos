@@ -83,7 +83,7 @@ jQuery(document).ready(function(){
 					}
 				}
 				
-				jQuery('[data-interactive="comentarios"]').append('<textarea data-interactive="comentariotext" class="agregar-comentario" name="comentario" placeholder="Escribí un comentario"></textarea><input placeholder="nickname" data-interactive="nick"/><button class="boton" data-interactive="crearComentario">Enviar</boton>');
+				jQuery('[data-interactive="comentarios"]').append('<textarea data-interactive="comentariotext" class="agregar-comentario" name="comentario" placeholder="Escribí un comentario" maxlength="200"></textarea><input placeholder="nickname" data-interactive="nick"/><button class="boton" data-interactive="crearComentario">Enviar</boton>');
 				
 				var usuario = new Usuario();
 				usuario.userInfo(function(error, estaLoggeado){
@@ -173,7 +173,7 @@ jQuery(document).ready(function(){
 				if(data == false){
 					alert('Ocurrió un error al buscar el pruducto seleccionado');
 				}else{
-					jQuery('[data-interactive="tipo"] option[value="'+ data.tipo.id +'"]').prop('selected', true);
+					jQuery('[data-interactive="tipo"] option[value="'+ data.tipo +'"]').prop('selected', true);
 
 					buscarProductos(data.tipo, idProducto);
 				}
