@@ -196,13 +196,18 @@ Comentarios.prototype = {
 			idProducto: this.idProducto,
 			comentario: this.comentario,
 			nickname: this.nickname
-		}, function(response){
-			if(cb)
-				cb(null, response);
-		}, "json")
-		.fail(function() {
-		    if(cb){
-				cb({});
+		}, function(){}, "json")
+		.always(function(data, statusName, jqXHR){
+			var statusCode = jqXHR.status || data.status;
+			switch(statusCode){
+				case 200:
+					if(cb)
+						cb();
+				break;
+				case 400:
+					if(cb)
+						cb({error:'BAD_REQUEST'});
+				break;
 			}
 		});
 	},

@@ -98,20 +98,25 @@ jQuery(document).ready(function(){
 				jQuery('[data-interactive="crearComentario"]').click(function(){
 					var comentario = jQuery('[data-interactive="comentariotext"]').val();
 					comentario = comentario.trimLeft().trimRight().replace(/\s\s/g, " ").replace(/\s\s/g, " ");
-					var comentarioObj = new Comentarios();						
-					comentarioObj.comentario = comentario;
-					comentarioObj.idProducto = idProducto;
-					comentarioObj.nickname = jQuery('[data-interactive="nick"]').val();
-					comentarioObj.crear(function(err){
-						if(err){
-							alert("Lo sentimos. No pudimos agregar tu comentario. Intentalo luego.");
-						}else{
-							alert("Comentario agregado");
-							sessionStorage.setItem("ip", btoa(idProducto));
-							sessionStorage.setItem("if", btoa(jQuery('[data-interactive="semana"]').val()));
-							location.reload();
-						}
-					});
+
+					if(comentario.length > 0){
+						var comentarioObj = new Comentarios();						
+						comentarioObj.comentario = comentario;
+						comentarioObj.idProducto = idProducto;
+						comentarioObj.nickname = jQuery('[data-interactive="nick"]').val();
+						comentarioObj.crear(function(err){
+							if(err){
+								alert("Verifique su comentario e intentelo nuevamente.");
+							}else{
+								alert("Comentario agregado");
+								sessionStorage.setItem("ip", btoa(idProducto));
+								sessionStorage.setItem("if", btoa(jQuery('[data-interactive="semana"]').val()));
+								location.reload();
+							}
+						});
+					}else{
+						alert("Verifique su comentario e intentelo nuevamente.");
+					}
 				});
 			}else{
 				alert('Error al consultar el producto seleccionado.');

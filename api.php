@@ -82,10 +82,14 @@
                     case 'crear':
                         $idUsuario = null;
                         $comentario = substr($_POST['comentario'], 0, 200);
-                        if(isset($_SESSION['usr'])){
-                            $idUsuario = $_SESSION['usr'];
+                        if(strlen(trim($comentario)) > 0){
+                            if(isset($_SESSION['usr'])){
+                                $idUsuario = $_SESSION['usr'];
+                            }
+                            $recurso->crear($_POST['idProducto'], $comentario, $idUsuario, $_POST['nickname']);
+                        }else{
+                            http_response_code(400);
                         }
-                        $recurso->crear($_POST['idProducto'], $comentario, $idUsuario, $_POST['nickname']);
                     break;
                 }
             break;
