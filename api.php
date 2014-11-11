@@ -81,10 +81,11 @@
                 switch($param){
                     case 'crear':
                         $idUsuario = null;
+                        $comentario = substr($_POST['comentario'], 0, 200);
                         if(isset($_SESSION['usr'])){
                             $idUsuario = $_SESSION['usr'];
                         }
-                        $recurso->crear($_POST['idProducto'], $_POST['comentario'], $idUsuario, $_POST['nickname']);
+                        $recurso->crear($_POST['idProducto'], $comentario, $idUsuario, $_POST['nickname']);
                     break;
                 }
             break;
@@ -111,14 +112,26 @@
                 $recurso = new Recurso_Usuarios();
                 switch($param){
                     case 'crear':
-                        $exitoso = $recurso->crear($_POST['email'], $_POST['contrasena'], $_POST['nombre'], $_POST['apellido']);
-                        if(isset($exitoso)){
-                            $retorno = array("id"=>$recurso->id);
+                        if(validarUsuario()){
+                            $email = $_POST['email'];
+                            if($recurso->obtenerPorEmail($email)){
+                                http_response_code(409);
+                            }else{
+                                $password = generarPasswordEncriptado($email, $_POST['contrasena']);
+                                $exitoso = $recurso->crear($email, $password, $_POST['nombre'], $_POST['apellido']);
+                                if(isset($exitoso)){
+                                    $retorno = array("id"=>$recurso->id);
+                                }
+                            }
+                        }else{
+                            http_response_code(400);
                         }
                     break;
                     case 'login':
                         $basic = preg_split('/&/', base64_decode($_POST['basic']));
-                        $idUsuario = $recurso->login($basic[0], $basic[1]);
+                        $email = $basic[0];
+                        $password = generarPasswordEncriptado($basic[0], $basic[1]);
+                        $idUsuario = $recurso->login($email, $password);
                         if($idUsuario == null){
                             http_response_code(401);
                         }else{
@@ -244,5 +257,32 @@
             break;
         }
         return json_encode($retorno, JSON_FORCE_OBJECT);
+    }
+
+    function validarUsuario(){
+        if(strlen(trim($_POST['email'])) == 0 ){
+            return false;
+        }
+        if(strlen(trim($_POST['contrasena'])) == 0 ){
+            return false;
+        }
+        if(strlen(trim($_POST['confirmacion'])) == 0 ){
+            return false;
+        }
+        if(strlen(trim($_POST['nombre'])) == 0 ){
+            return false;
+        }
+        if(strlen(trim($_POST['apellido'])) == 0 ){
+            return false;
+        }
+        if($_POST['contrasena'] != $_POST['confirmacion']){
+            return false;
+        }
+        return true;
+    }
+
+    function generarPasswordEncriptado($email,$password){
+        $saltKey = "SCAW2014%";
+        return MD5($email. $password . $saltKey);
     }
  ?>

@@ -50,5 +50,19 @@
 			$this->email = $entidad->Email;
 			return $this;
 		}
+
+		public function obtenerPorEmail($email){
+			$entidad = $this->entidad->obtenerPorEmail($email);
+			if($entidad != null){
+				$this->id = $entidad->IdUsuario;
+				$this->nombre = $entidad->Nombre;
+				$this->apellido = $entidad->Apelllido;
+				$this->email = $entidad->Email;
+				return true;
+			}else{
+				return false;
+			}
+		}
+
 	}
 ?>

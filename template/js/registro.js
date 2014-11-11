@@ -33,12 +33,22 @@ jQuery(document).ready(function(){
 		usuario.contrasena = password;
 		usuario.nombre = nombre;
 		usuario.apellido = apellido;
+		usuario.confirmacion = password2;
 
-		usuario.crear(function(data){
-			if(data){
-				location.href = "/template/index.php";
+		usuario.crear(function(error, data){
+			if(error){
+				if(error.error == 'CONFLICT'){
+					alert('Ya existe un usuario con el email especificado');
+				}else{
+					alert("Ah ocurrido un error inesperado. Verifique los datos y vuelva a intertarlo.");
+				}
 			}else{
-				alert("Ah ocurrido un error. Verifique los datos y vuelva a intertarlo.");
+				usuario.login(function(err){
+					if(err){
+						alert("Ah ocurrido un error al intentar loggear al usuario.");
+					}
+					location.href = "/template/index.php";
+				});
 			}
 		});
 	});

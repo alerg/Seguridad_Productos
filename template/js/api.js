@@ -12,11 +12,29 @@ Usuario.prototype = {
 			email: this.email,
 			contrasena: this.contrasena,
 			nombre: this.nombre,
-			apellido: this.apellido
+			apellido: this.apellido,
+			confirmacion: this.confirmacion
 		}, function(response){
 			if(cb)
-				cb(response);
-		}, "json"); 
+				cb(null,response);
+		}, "json")
+		.always(function(data, statusName, jqXHR){
+			var statusCode = jqXHR.status || data.status;
+			switch(statusCode){
+				case 200:
+					if(cb)
+						cb();
+				break;
+				case 400:
+					if(cb)
+						cb({error:'BAD_REQUEST'});
+				break;
+				case 409:
+					if(cb)
+						cb({error:'CONFLICT'});
+				break;
+			}
+		});
 	},
 	login : function(cb){
 		var that = this;
@@ -28,7 +46,7 @@ Usuario.prototype = {
 		}, "json")
 		.always(function(data, statusName, jqXHR){
 			if(jqXHR.status == 204){
-				cb();			
+				cb(null);			
 			}else{
 				if(cb)
 					cb({});
