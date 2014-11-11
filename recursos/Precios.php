@@ -39,9 +39,10 @@
 
 		public function crear(){
 			$this->entidad->IdProducto = $this->idProducto;
+			$this->entidad->IdUsuario = $this->idUsuario;
 			$fecha = new DateTime("now");
 
-			$registros = $this->obtenerPorSemana($fecha);
+			$registros = $this->obtenerPorSemanaPorUsuario($fecha);
 
 			if(count($registros) > 0 ){
 				return $this->modificar($registros[0]->fecha);
@@ -60,8 +61,25 @@
 			$this->entidad->IdUsuario = $this->idUsuario;
 			$fechaNueva = new DateTime("now");
 			$this->entidad->FechaPrecio = $fechaNueva->format('Y-m-d H:i:s');
-			$this->entidad->setFiltro(array(array('FechaPrecio', $fecha),array('IdProducto', $this->idProducto)));
+			$this->entidad->setFiltro(array(array('IdUsuario', $this->idUsuario), array('FechaPrecio', $fecha),array('IdProducto', $this->idProducto)));
 			$this->entidad->modificar();
+		}
+		
+		public function obtenerPorSemanaPorUsuario($fecha){
+			$this->entidad->IdProducto = $this->idProducto;
+			$this->entidad->IdUsuario = $this->idUsuario;
+			$entidades = $this->entidad->obtenerPorSemanaPorUsuario($fecha);
+			$recursos = array();
+			foreach ($entidades as $key => $value) {
+				$recurso = new Recurso_Precios();
+				$recurso->idProducto = $value->IdProducto;
+				$recurso->idUsuario = $value->IdUsuario;
+				$recurso->monto = $value->Monto;
+				$recurso->fecha = $value->FechaPrecio;
+
+				array_push($recursos, $recurso);
+			}
+			return $recursos;
 		}
 
 		public function obtenerPorSemana($fecha){

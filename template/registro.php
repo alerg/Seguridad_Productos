@@ -27,26 +27,28 @@
 	<section>
 		<fieldset>
 			<h2>Registrarse</h2>
-			<div class="columna columna--doble">
-				<label for="email">Email:</label>
-				<input name="email" class="datos" data-interactive="email" type="text"/>
-				
-				<label for="nombre">Nombre:</label>
-				<input name="nombre" class="datos" data-interactive="nombre" type="text"/>
+			<form data-interactive="registrarForm">
+				<div class="columna columna--doble">
+					<label for="email">Email:</label>
+					<input name="email" nombre="Email" class="datos" data-interactive="email" type="email" required/>
+					
+					<label for="nombre">Nombre:</label>
+					<input name="nombre" nombre="Nombre" class="datos" data-interactive="nombre" type="text" required/>
 
-				<label for="apellido">Apellido:</label>
-				<input name="apellido" class="datos" data-interactive="apellido" type="text"/>
-			</div>
-			<div class="columna columna--doble">
-				<label for="contrasena">Contraseña:</label>
-				<input name="contrasena" class="datos" data-interactive="contrasena" type="password"/>
-				
-				<label for="contrasena2">Repetir contraseña:</label>
-				<input name="contrasena2" class="datos" data-interactive="contrasena2" type="password"/>
-			</div>
-			<div class="columna columna--simple">
-				<button class="boton" data-interactive="registrar">Registrarse</button>
-			</div>
+					<label for="apellido">Apellido:</label>
+					<input name="apellido" nombre="Apellido" class="datos" data-interactive="apellido" type="text" required/>
+				</div>
+				<div class="columna columna--doble">
+					<label for="contrasena">Contraseña:</label>
+					<input name="contrasena" nombre="Contraseña" class="datos" data-interactive="contrasena" type="password" min="8" max="20" required/>
+					
+					<label for="contrasena2">Repetir contraseña:</label>
+					<input name="contrasena2" nombre="Repetir contraseña" class="datos" data-interactive="contrasena2" type="password"  min="8" max="20" required/>
+				</div>
+				<div class="columna columna--simple">
+					<button class="boton" type="submit" data-interactive="registrar">Registrarse</button>
+				</div>
+			</form>
 		</fieldset>
 	</section>
 		
