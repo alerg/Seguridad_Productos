@@ -179,6 +179,24 @@ Precio.prototype = {
 				cb({});
 			}
 		}); 
+	},
+	obtenerPorSemanaPorUsuario: function(idProducto, cb){
+		jQuery.get('/api/precios/obtenerPorSemanaPorUsuario', {
+			idProducto: idProducto
+		}, function(response){}, "json")
+		.always(function(data, statusName, jqXHR){
+			var statusCode = jqXHR.status || data.status;
+			switch(statusCode){
+				case 200:
+					if(cb)
+						cb();
+				break;
+				case 401:
+					if(cb)
+						cb({error:'UNAUTHORIZED'});
+				break;
+			}
+		});	
 	}
 }
 

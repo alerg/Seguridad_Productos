@@ -163,11 +163,17 @@
                         $retorno = $recurso->obtenerPorProducto();
                     break;
                     case 'obtenerPorProductoUsuario':                        
-                        $precio = new Recurso_Precios();
-                        $precio->idProducto = $_GET['idProducto'];
-                        $precio->idUsuario = $_SESSION['usr'];
-                        $retorno = $precio->obtenerPorProductoUsuario();
+                        $recurso->idProducto = $_GET['idProducto'];
+                        $recurso->idUsuario = $_SESSION['usr'];
+                        $retorno = $recurso->obtenerPorProductoUsuario();
                     break;  
+                    case 'obtenerPorSemanaPorUsuario':
+                        $hoy = new DateTime("now");
+                        $hoy=  $hoy->format('Y-m-d H:i:s');
+                        $recurso->idProducto = $_GET['idProducto'];
+                        $recurso->idUsuario = $_SESSION['usr'];
+                        $retorno = $recurso->obtenerPorSemanaPorUsuario($hoy);
+                    break;
                 }
             break;
             case 'tiposProducto':

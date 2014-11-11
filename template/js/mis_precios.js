@@ -41,7 +41,7 @@ jQuery(document).ready(function(){
 
 					jQuery('[data-interactive="modificar"]').click(function(){
 						sessionStorage.setItem("idProducto", jQuery(this).attr("producto"));
-						location.href = "/cargar_precio";
+						location.href = "/template/cargar_precio.php";
 					});		
 				}
 

@@ -80,11 +80,10 @@
 		</section>
 		
 		<section class="cargar hide" data-interactive="cargarSection">
-			<a data-interactive="cargarPrecio" href="">Cargar Precio</a>
+			<button class="boton" data-interactive='cargarPrecio'>Cargar Precio</button>
 		</section>
 		
 		<section class="caja-comentarios contenedor" data-interactive="comentarios">
-			
 		</section>
 		
 	</section>

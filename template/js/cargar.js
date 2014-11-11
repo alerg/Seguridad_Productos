@@ -35,6 +35,14 @@ jQuery(document).ready(function(){
 		}else{
 			jQuery('[data-interactive="tipo"]').val(data.tipo.descripcion);
 			jQuery('[data-interactive="producto"]').val(data.descripcion);
+			var precio = new Precio();
+			precio.obtenerPorSemanaPorUsuario(idProducto, function(error, data){
+				if(error){
+					location.href = "/template/index.php";
+				}else{
+					alert("Ya posee un precio ingresado para el producto seleccionado. En caso de continuar se modificará.");
+				}
+			});
 		}
 	});
 });
