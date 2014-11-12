@@ -14,10 +14,7 @@ Usuario.prototype = {
 			nombre: this.nombre,
 			apellido: this.apellido,
 			confirmacion: this.confirmacion
-		}, function(response){
-			if(cb)
-				cb(null,response);
-		}, "json")
+		}, function(){}, "json")
 		.always(function(data, statusName, jqXHR){
 			var statusCode = jqXHR.status || data.status;
 			switch(statusCode){
