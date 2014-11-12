@@ -4,7 +4,7 @@
 
 		public $IdUsuario;
 		public $Nombre;
-		public $Apelllido;
+		public $Apellido;
 		public $Email;
 		public $Password;
 

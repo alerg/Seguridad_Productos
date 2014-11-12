@@ -21,7 +21,7 @@
 			$this->entidad->Email = $email;
 			$this->entidad->Password = $contrasena;
 			$this->entidad->Nombre = $nombre;
-			$this->entidad->Apelllido = $apellido;
+			$this->entidad->Apellido = $apellido;
 			
 			$retorno = $this->entidad->crear();
 			if($retorno){
@@ -46,7 +46,7 @@
 			$entidad = $this->entidad->obtener();
 			$this->id = $entidad->IdUsuario;
 			$this->nombre = $entidad->Nombre;
-			$this->apellido = $entidad->Apelllido;
+			$this->apellido = $entidad->Apellido;
 			$this->email = $entidad->Email;
 			return $this;
 		}
@@ -56,7 +56,7 @@
 			if($entidad != null){
 				$this->id = $entidad->IdUsuario;
 				$this->nombre = $entidad->Nombre;
-				$this->apellido = $entidad->Apelllido;
+				$this->apellido = $entidad->Apelido;
 				$this->email = $entidad->Email;
 				return true;
 			}else{

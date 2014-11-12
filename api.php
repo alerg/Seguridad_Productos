@@ -169,7 +169,7 @@
                     break;  
                     case 'obtenerPorSemanaPorUsuario':
                         $hoy = new DateTime("now");
-                        $hoy=  $hoy->format('Y-m-d H:i:s');
+                        //$hoy=  $hoy->format('Y-m-d H:i:s');
                         $recurso->idProducto = $_GET['idProducto'];
                         $recurso->idUsuario = $_SESSION['usr'];
                         $retorno = $recurso->obtenerPorSemanaPorUsuario($hoy);
@@ -293,6 +293,7 @@
 
     function generarPasswordEncriptado($email,$password){
         $saltKey = "SCAW2014%";
+        echo MD5($email. $password . $saltKey);
         return MD5($email. $password . $saltKey);
     }
  ?>

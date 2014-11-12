@@ -186,7 +186,7 @@ Precio.prototype = {
 			switch(statusCode){
 				case 200:
 					if(cb)
-						cb();
+						cb(null, data);
 				break;
 				case 401:
 					if(cb)

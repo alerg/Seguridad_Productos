@@ -16,6 +16,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+CREATE DATABASE IF NOT EXISTS scaw;
+
+USE scaw;
+
 --
 -- Base de datos: `scaw`
 --
@@ -215,7 +219,7 @@ INSERT INTO `tipoproducto` (`IdTipoProducto`, `Descripcion`) VALUES
 CREATE TABLE IF NOT EXISTS `usuario` (
   `IdUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(255) NOT NULL,
-  `Apelllido` varchar(255) NOT NULL,
+  `Apellido` varchar(255) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
   PRIMARY KEY (`IdUsuario`),
@@ -226,8 +230,8 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`IdUsuario`, `Nombre`, `Apelllido`, `Email`, `Password`) VALUES
-(1, 'Seguridad', 'Informatica', 'scaw@unlam.edu.ar', '/*-Unl@m-*/');
+INSERT INTO `usuario` (`IdUsuario`, `Nombre`, `Apellido`, `Email`, `Password`) VALUES
+(1, 'Seguridad', 'Informatica', 'scaw@unlam.edu.ar', 'c693c1fd79273a48d221e16c44e6bb38');
 
 --
 -- Restricciones para tablas volcadas

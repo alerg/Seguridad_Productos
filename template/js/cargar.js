@@ -40,7 +40,13 @@ jQuery(document).ready(function(){
 				if(error){
 					location.href = "/template/index.php";
 				}else{
-					alert("Ya posee un precio ingresado para el producto seleccionado. En caso de continuar se modificará.");
+					var existePrecio  = false;
+					for (var index in data) {
+						existePrecio = true;
+					}
+					if(existePrecio){
+						alert("Ya posee un precio ingresado para el producto seleccionado. En caso de continuar se modificará.");
+					}
 				}
 			});
 		}
