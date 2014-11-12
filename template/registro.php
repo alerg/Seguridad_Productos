@@ -40,10 +40,10 @@
 				</div>
 				<div class="columna columna--doble">
 					<label for="contrasena">Contraseña:</label>
-					<input id="contrasena" name="contrasena" data-name="Contraseña" class="datos" data-interactive="contrasena" type="password" min="8" max="20" required/>
+					<input id="contrasena" name="contrasena" data-name="Contraseña" class="datos" data-interactive="contrasena" type="password"  maxlength="30" required/>
 					
 					<label for="contrasena2">Repetir contraseña:</label>
-					<input id="contrasena2" name="contrasena2" data-name="Repetir contraseña" class="datos" data-interactive="contrasena2" type="password"  min="8" max="20" required/>
+					<input id="contrasena2" name="contrasena2" data-name="Repetir contraseña" class="datos" data-interactive="contrasena2" type="password" maxlength="30" required/>
 				</div>
 				<div class="columna columna--simple">
 					<button class="boton" type="submit" data-interactive="registrar">Registrarse</button>
