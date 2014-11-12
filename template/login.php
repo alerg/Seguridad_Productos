@@ -28,9 +28,9 @@
 			<h2>Login</h2>
 			<div class="columna columna--doble">
 				<label for="email">Email:</label>
-				<input name="email" class="datos" data-interactive="email" type="text"/>
+				<input id="email" name="email" class="datos" data-interactive="email" type="text"/>
 				<label for="contrasena">Contraseña:</label>
-				<input name="contrasena" class="datos" data-interactive="contrasena" type="password"/>
+				<input id="contrasena" name="contrasena" class="datos" data-interactive="contrasena" type="password"/>
 			</div>
 			<div class="columna columna--doble">
 				<button class="boton" data-interactive="login">Loguearse</button>

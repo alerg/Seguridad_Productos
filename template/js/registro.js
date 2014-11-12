@@ -23,7 +23,7 @@ jQuery(document).ready(function(){
 				if(esVacio(valor)){
 					jQuery(campos[i]).val('');
 					jQuery(campos[i]).focus();
-					var nombre = jQuery(campos[i]).attr('nombre');
+					var nombre = jQuery(campos[i]).attr('data-name');
 					alert("Verifique que el campo "+ nombre +" no este vacío.");
 					return;
 				}
